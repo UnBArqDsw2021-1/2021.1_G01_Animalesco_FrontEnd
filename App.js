@@ -1,24 +1,22 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
-import Routes from "./src/routes";
+import { StyleSheet, View } from "react-native";
+// import Routes from "./src/routes.js";
+import Login from "./src/screens/Login";
+import colors from "./assets/styles/colors";
 
 export default function App() {
   return (
-    <>
-      <StatusBar style="auto" />
-      <Routes />
-    </>
-    // <View style={styles.container}>
-    //   <Text>Open up App.js to start working on your app!</Text>
-    // </View>
+    <View style={styles.container}>
+      <StatusBar />
+      <Login />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },

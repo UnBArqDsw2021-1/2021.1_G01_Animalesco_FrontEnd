@@ -8,8 +8,11 @@ import {
   ActivityIndicator,
   Button,
   Keyboard,
+  TouchableOpacity,
 } from "react-native";
-import styles from "./styles";
+import { LinearGradient } from "expo-linear-gradient";
+import styles from "./styles.js";
+import colors from "../../../assets/styles/colors";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,12 +30,9 @@ const Login = () => {
 
   const loginHandler = async () => {
     setLoadingLoginRequest(true);
-    console.log(email);
-    console.log(password);
     const data = { email: email.trim(), password };
     Keyboard.dismiss;
     setLoadingLoginRequest(true);
-    console.log(data);
     // aqui entrará o post para a api
 
     // await useService(SessionService, "signIn", [data]);
@@ -49,62 +49,58 @@ const Login = () => {
       type="white"
       title="ENTRAR"
       press={loginHandler}
+      color={colors.secondaryBlue}
       disabled={buttonDisabled || loadingLoginRequest}
     />
   );
 
   return (
-    <KeyboardAvoidingView>
-      {/* <View style={styles.logo}>
+    <LinearGradient
+      style={styles.container}
+      start={[0, 0]}
+      end={[1.8, 1]}
+      colors={[colors.primary, colors.secondary]}
+    >
+      <KeyboardAvoidingView style={styles.content}>
         <Image
           style={styles.logoImage}
-          source={require("../../../assets/images/logo.png")}
+          source={require("../../../assets/images/logo_without_background.png")}
         />
-      </View> */}
-      <View>
-        <Text>
+        <View style={styles.inputContent}>
           <TextInput
             keyboardType="email-address"
             style={styles.textInput}
             placeholder="Email"
             autoCorrect={false}
-            placeholderTextColor="#FFF"
+            placeholderTextColor={colors.dark}
             onChangeText={(email) => setEmail(email)}
             value={email}
           />
           <TextInput
             style={styles.textInput}
             secureTextEntry
-            placeholderTextColor="#FFF"
+            placeholderTextColor={colors.dark}
             placeholder="Senha"
             autoCorrect={false}
             onChangeText={(password) => setPassword(password)}
             value={password}
           />
-        </Text>
-      </View>
-      <View style={styles.viewBtn}>
-        {/* <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("forgotPassword");
-          }}
-          style={styles.forgotPasswordButton}
-        >
-          <Text style={styles.forgotPasswordtext}>Esqueceu a senha?</Text>
-        </TouchableOpacity> */}
-        <View style={styles.login}>
-          {loadingLoginRequest ? renderLoadingIndicator() : renderLoginButton()}
+          <View style={styles.viewBtn}>
+            <TouchableOpacity style={styles.forgotPasswordButton}>
+              <Text style={styles.forgotPasswordtext}>Esqueceu a senha?</Text>
+            </TouchableOpacity>
+            <View style={styles.login}>
+              {loadingLoginRequest
+                ? renderLoadingIndicator()
+                : renderLoginButton()}
+            </View>
+            <TouchableOpacity style={styles.signUP}>
+              <Text style={styles.signupText}>Criar Conta</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        {/* <TouchableOpacity
-          style={styles.signUP}
-          onPress={() => {
-            navigation.navigate("location");
-          }}
-        >
-          <Text style={styles.signupText}>Criar Conta</Text>
-        </TouchableOpacity> */}
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </LinearGradient>
   );
 };
 

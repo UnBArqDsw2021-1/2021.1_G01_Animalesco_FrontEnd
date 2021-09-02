@@ -4,59 +4,44 @@ import colors from "../../../assets/styles/colors";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.primary,
-  },
-  logo: {
-    marginTop: 50,
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     width: "100%",
-  },
-  input: {
-    marginTop: 20,
-    alignItems: "center",
+    display: "flex",
     justifyContent: "center",
-    marginHorizontal: 20,
+    alignItems: "center",
   },
-
+  content: {
+    height: "100%",
+    display: "flex",
+    justifyContent: "space-evenly",
+  },
+  inputContent: {
+    marginVertical: 50,
+  },
   textInput: {
-    // ...fonts.body,
-    borderBottomWidth: 2,
-    borderBottomColor: colors.light,
-    color: colors.light,
-    marginVertical: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    color: colors.dark,
+    borderRadius: 5,
+    backgroundColor: colors.light,
+    marginVertical: 10,
     width: "100%",
-  },
-  forgotPassword: {
-    justifyContent: "flex-end",
-  },
-  forgotPasswordButton: {
-    alignSelf: "flex-end",
   },
   forgotPasswordtext: {
-    // ...fonts.body,
-    marginHorizontal: 20,
-    marginBottom: 20,
+    color: colors.light,
+    paddingBottom: 5,
+  },
+  signupText: {
+    paddingTop: 2,
     color: colors.light,
   },
   viewBtn: {
-    alignItems: "center",
-    flex: 1,
+    marginTop: 10,
   },
   login: {
-    width: "90%",
-  },
-  signupText: {
-    // ...fonts.body,
-    color: colors.light,
-    fontFamily: "montserrat-semibold",
-    borderBottomWidth: 1,
-    borderBottomColor: "#fff",
-    fontSize: 18,
+    borderRadius: 5,
   },
   logoImage: {
-    flex: 1,
+    height: 150,
     resizeMode: "contain",
   },
 });
