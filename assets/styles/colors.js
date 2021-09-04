@@ -7,6 +7,7 @@ const colors = {
   secondaryBlue: "#0071bc",
   danger: "#e47171",
   dark: "#353535",
+  gray: "#35353554",
   light: "#f7f7f7",
 };
 

@@ -1,16 +1,16 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 // import Routes from "./src/routes.js";
+import { NavigationContainer } from "@react-navigation/native";
 import Login from "./src/screens/Login";
-import colors from "./assets/styles/colors";
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <NavigationContainer style={styles.container}>
       <StatusBar />
       <Login />
-    </View>
+    </NavigationContainer>
   );
 }
 

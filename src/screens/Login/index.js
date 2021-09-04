@@ -58,7 +58,7 @@ const Login = () => {
     <LinearGradient
       style={styles.container}
       start={[0, 0]}
-      end={[1.8, 1]}
+      end={[1.5, 0.8]}
       colors={[colors.primary, colors.secondary]}
     >
       <KeyboardAvoidingView style={styles.content}>
@@ -72,14 +72,14 @@ const Login = () => {
             style={styles.textInput}
             placeholder="Email"
             autoCorrect={false}
-            placeholderTextColor={colors.dark}
+            placeholderTextColor={colors.gray}
             onChangeText={(email) => setEmail(email)}
             value={email}
           />
           <TextInput
             style={styles.textInput}
             secureTextEntry
-            placeholderTextColor={colors.dark}
+            placeholderTextColor={colors.gray}
             placeholder="Senha"
             autoCorrect={false}
             onChangeText={(password) => setPassword(password)}

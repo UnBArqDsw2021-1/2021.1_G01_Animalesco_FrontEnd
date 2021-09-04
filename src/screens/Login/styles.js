@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   inputContent: {
-    marginVertical: 50,
+    marginBottom: 50,
   },
   textInput: {
     paddingHorizontal: 10,
@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   logoImage: {
-    height: 150,
+    height: 160,
+    marginTop: 60,
     resizeMode: "contain",
   },
 });
