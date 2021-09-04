@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/logo.png",
     "splash": {
-      "image": "./assets/images/logo_without_background_big_size.png",
+      "image": "./assets/images/logo_big_horizontal_size.png",
       "resizeMode": "contain",
       "backgroundColor": "#f15a24"
     },
@@ -21,7 +21,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo_without_background_big_size.png",
+        "foregroundImage": "./assets/images/logo_big_horizontal_size.png",
         "backgroundColor": "#f15a24"
       }
     },

@@ -8,7 +8,7 @@ import Login from "./src/screens/Login";
 export default function App() {
   return (
     <NavigationContainer style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar style="dark" />
       <Login />
     </NavigationContainer>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { setStatusBarStyle } from "expo-status-bar";
 import {
   KeyboardAvoidingView,
   View,
@@ -19,6 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
+  setStatusBarStyle("light");
 
   useEffect(() => {
     if (email && password) {
@@ -26,7 +28,7 @@ const Login = () => {
     } else {
       setButtonDisabled(true);
     }
-  }, [email, password]);
+  }, [email, password, buttonDisabled]);
 
   const loginHandler = async () => {
     setLoadingLoginRequest(true);
