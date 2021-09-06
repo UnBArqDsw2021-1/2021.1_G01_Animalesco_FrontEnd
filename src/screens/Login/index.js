@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
@@ -20,6 +21,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
+  const navigation = useNavigation();
   setStatusBarStyle("light");
 
   useEffect(() => {
@@ -55,6 +57,10 @@ const Login = () => {
       disabled={buttonDisabled || loadingLoginRequest}
     />
   );
+
+  const handleSignUp = () => {
+    navigation.navigate("signUp");
+  };
 
   return (
     <LinearGradient
@@ -96,7 +102,7 @@ const Login = () => {
                 ? renderLoadingIndicator()
                 : renderLoginButton()}
             </View>
-            <TouchableOpacity style={styles.signUP}>
+            <TouchableOpacity style={styles.signUP} onPress={handleSignUp}>
               <Text style={styles.signupText}>Criar Conta</Text>
             </TouchableOpacity>
           </View>
