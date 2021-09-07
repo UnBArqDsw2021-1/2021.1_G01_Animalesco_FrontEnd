@@ -26,15 +26,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logoImage: {
-    width: 285,
-    height: 300,
+    width: 240,
+    height: 255,
     transform: [{ rotate: "20 deg" }],
     position: "relative",
     left: "-30%",
   },
   content: {
     display: "flex",
-    height: "40%",
+    height: "50%",
     justifyContent: "space-between",
     alignItems: "center",
   },
@@ -67,6 +67,12 @@ const styles = StyleSheet.create({
   },
   nextText: {
     color: "#fff",
+  },
+  stepper: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "25%",
   },
 });
 

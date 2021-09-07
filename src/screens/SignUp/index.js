@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -7,17 +7,16 @@ import {
   Image,
   Text,
   TextInput,
-  ActivityIndicator,
-  Button,
-  Keyboard,
   TouchableOpacity,
 } from "react-native";
 import styles from "./styles.js";
 import colors from "../../../assets/styles/colors";
 
+import Stepper from "../../components/Stepper.js";
+
 const SignUp = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const navigation = useNavigation();
 
   return (
@@ -42,22 +41,19 @@ const SignUp = () => {
               onChangeText={setEmail}
               value={email}
             />
-            <Text style={styles.inputTopText}>Senha</Text>
+            <Text style={styles.inputTopText}>Nome</Text>
             <TextInput
               style={styles.input}
-              onChangeText={setPassword}
-              value={password}
+              onChangeText={setName}
+              value={name}
             />
             <TouchableOpacity style={styles.nextButton}>
               <Text style={styles.nextText}>Próximo</Text>
             </TouchableOpacity>
           </View>
 
-          <View>
-            <Text>
-              {/* Aqui vão as bolinhas demonstrando em qual etapa o processo está */}
-              . . . .
-            </Text>
+          <View style={styles.stepper}>
+            <Stepper step={1} />
           </View>
         </View>
       </View>
