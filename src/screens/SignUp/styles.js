@@ -74,6 +74,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "25%",
   },
+  icon: {
+    top: 50,
+    left: -130,
+  },
 });
 
 export default styles;

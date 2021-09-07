@@ -8,7 +8,9 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  
 } from "react-native";
+import { AntDesign } from '@expo/vector-icons';
 import styles from "./styles.js";
 import colors from "../../../assets/styles/colors";
 
@@ -21,6 +23,14 @@ const SignUp = () => {
 
   return (
     <KeyboardAvoidingView style={styles.page}>
+       <TouchableOpacity>
+      <AntDesign
+            name="arrowleft"
+            size={24}
+            color={colors.primary}
+            style={styles.icon}
+          />
+          </TouchableOpacity>
       {/* Tem que colocar essa imagem para ser o botão de voltar */}
       {/* <TouchableOpacity style={styles.goBackButton}>
         <Image
