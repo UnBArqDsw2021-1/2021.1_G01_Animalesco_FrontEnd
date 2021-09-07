@@ -77,6 +77,19 @@ const styles = StyleSheet.create({
   icon: {
     alignSelf: "baseline",
   },
+  imageProfile:{
+    width: 130,
+    height: 130,
+    left: 5,
+    top: -50,
+    borderRadius: 60,
+    alignSelf: 'center',
+  },
+  iconPhoto: {
+    alignSelf: "baseline",
+    left: 100,
+    top: -70,
+  },
 });
 
 export default styles;
