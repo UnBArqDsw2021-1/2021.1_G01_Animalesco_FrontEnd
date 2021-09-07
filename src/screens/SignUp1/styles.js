@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import Constants from "expo-constants";
 import colors from "../../../assets/styles/colors";
 
 const styles = StyleSheet.create({
@@ -8,13 +9,12 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: Constants.statusBarHeight + 20,
+    backgroundColor: "#E1E7E4",
   },
   goBackButton: {
     alignSelf: "flex-start",
-    width: 10,
-    height: 16,
-    marginLeft: 40,
-    marginTop: 40,
+    marginLeft: 10,
   },
   goBackImage: {
     width: 10,
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   content: {
     display: "flex",
-    height: "50%",
+    height: "40%",
     justifyContent: "space-between",
     alignItems: "center",
   },
@@ -75,8 +75,7 @@ const styles = StyleSheet.create({
     width: "25%",
   },
   icon: {
-    top: 50,
-    left: -130,
+    alignSelf: "baseline",
   },
 });
 

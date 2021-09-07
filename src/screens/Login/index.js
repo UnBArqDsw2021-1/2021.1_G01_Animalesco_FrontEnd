@@ -59,7 +59,7 @@ const Login = () => {
   );
 
   const handleSignUp = () => {
-    navigation.navigate("signUp");
+    navigation.navigate("signUp1");
   };
 
   return (

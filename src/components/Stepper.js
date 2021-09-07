@@ -25,11 +25,6 @@ const Stepper = ({ step }) => {
       ) : (
         <Image source={unfilledBall} />
       )}
-      {step === 4 ? (
-        <Image source={filledBall} />
-      ) : (
-        <Image source={unfilledBall} />
-      )}
     </View>
   );
 };
