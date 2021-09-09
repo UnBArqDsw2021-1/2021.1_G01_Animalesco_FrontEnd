@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -20,8 +20,17 @@ import Stepper from "@components/Stepper.js";
 const Password = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(true);
   const navigation = useNavigation();
   setStatusBarStyle("dark");
+
+  useEffect(() => {
+    if (password && passwordConfirmation) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [password, passwordConfirmation]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -57,8 +66,11 @@ const Password = () => {
                 secureTextEntry={true}
               />
               <TouchableOpacity
-                style={styles.nextButton}
+                style={
+                  buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
+                }
                 onPress={() => navigation.navigate("photo")}
+                disabled={buttonDisabled}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>

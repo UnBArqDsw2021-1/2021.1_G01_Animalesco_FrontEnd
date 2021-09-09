@@ -75,6 +75,15 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: colors.secondaryBlue,
   },
+  nextButtoDisabled: {
+    width: 242,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    borderRadius: 3,
+    backgroundColor: colors.gray,
+  },
   nextText: {
     color: colors.light,
   },
