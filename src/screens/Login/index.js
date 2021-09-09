@@ -14,7 +14,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles.js";
-import colors from "../../../assets/styles/colors";
+import colors from "@assets/styles/colors";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -48,18 +48,19 @@ const Login = () => {
   );
 
   const renderLoginButton = () => (
-    <Button
-      large
-      type="white"
-      title="ENTRAR"
-      press={loginHandler}
-      color={colors.secondaryBlue}
+    <TouchableOpacity
+      style={
+        buttonDisabled ? styles.contentButtonDisabled : styles.contentButton
+      }
       disabled={buttonDisabled || loadingLoginRequest}
-    />
+      onPress={loginHandler}
+    >
+      <Text style={styles.button}>ENTRAR</Text>
+    </TouchableOpacity>
   );
 
   const handleSignUp = () => {
-    navigation.navigate("signUp1");
+    navigation.navigate("userinformation");
   };
 
   return (
@@ -69,10 +70,13 @@ const Login = () => {
       end={[1.5, 0.8]}
       colors={[colors.primary, colors.secondary]}
     >
-      <KeyboardAvoidingView style={styles.content}>
+      <KeyboardAvoidingView
+        style={styles.content}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
         <Image
           style={styles.logoImage}
-          source={require("../../../assets/images/logo_without_background.png")}
+          source={require("@assets/images/logo_without_background.png")}
         />
         <View style={styles.inputContent}>
           <TextInput

@@ -8,7 +8,9 @@ const colors = {
   danger: "#e47171",
   dark: "#353535",
   gray: "#35353554",
+  grayLight: "#35353514",
   light: "#f7f7f7",
+  ice: "#E1E7E4",
 };
 
 export default colors;

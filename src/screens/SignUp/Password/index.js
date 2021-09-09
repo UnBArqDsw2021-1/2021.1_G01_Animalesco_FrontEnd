@@ -13,38 +13,34 @@ import {
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles.js";
-import colors from "../../../assets/styles/colors";
+import colors from "@assets/styles/colors";
 
-import Stepper from "../../components/Stepper.js";
+import Stepper from "@components/Stepper.js";
 
-const SignUp1 = () => {
+const Password = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const navigation = useNavigation();
   setStatusBarStyle("dark");
 
   return (
-    <KeyboardAvoidingView
-      style={styles.page}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <View style={styles.goBackButton}>
-        <TouchableOpacity onPress={() => navigation.navigate("signUp1")}>
-          <AntDesign
-            name="arrowleft"
-            size={24}
-            color={colors.primary}
-            style={styles.icon}
-          />
-        </TouchableOpacity>
-      </View>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <Image
-            style={styles.logoImage}
-            source={require("../../../assets/images/orange_logo.png")}
-          />
-          <View style={styles.content}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.page}>
+        <View style={styles.goBackButton}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("userinformation")}
+          >
+            <AntDesign name="arrowleft" size={24} color={colors.primary} />
+          </TouchableOpacity>
+        </View>
+        <View
+          style={styles.container}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <KeyboardAvoidingView
+            style={styles.content}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          >
             <View style={styles.formCadastro}>
               <Text style={styles.inputTopText}>Senha</Text>
               <TextInput
@@ -62,20 +58,25 @@ const SignUp1 = () => {
               />
               <TouchableOpacity
                 style={styles.nextButton}
-                onPress={() => navigation.navigate("signUp3")}
+                onPress={() => navigation.navigate("photo")}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>
             </View>
-
-            <View style={styles.stepper}>
-              <Stepper step={2} />
-            </View>
+          </KeyboardAvoidingView>
+          <View style={styles.logoImageContent}>
+            <Image
+              style={styles.logoImage}
+              source={require("@assets/images/orange_mask_logo.png")}
+            />
           </View>
         </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+        <View style={styles.stepper}>
+          <Stepper step={2} />
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
-export default SignUp1;
+export default Password;

@@ -1,9 +1,9 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./screens/Login";
-import SignUp1 from "./screens/SignUp1";
-import SignUp2 from "./screens/SignUp2";
-import SignUp3 from "./screens/SignUp3";
+import UserInformation from "./screens/SignUp/UserInformation";
+import Password from "./screens/SignUp/Password";
+import Photo from "./screens/SignUp/Photo";
 
 const Stack = createStackNavigator();
 const Routes = () => {
@@ -15,9 +15,9 @@ const Routes = () => {
       }}
     >
       <Stack.Screen name="login" component={Login} />
-      <Stack.Screen name="signUp1" component={SignUp1} />
-      <Stack.Screen name="signUp2" component={SignUp2} />
-      <Stack.Screen name="signUp3" component={SignUp3} />
+      <Stack.Screen name="userinformation" component={UserInformation} />
+      <Stack.Screen name="password" component={Password} />
+      <Stack.Screen name="photo" component={Photo} />
     </Stack.Navigator>
   );
 };

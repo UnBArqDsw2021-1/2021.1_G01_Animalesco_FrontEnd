@@ -1,47 +1,54 @@
 import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
-import colors from "../../../assets/styles/colors";
+import colors from "@assets/styles/colors";
 
 const styles = StyleSheet.create({
   page: {
     flex: 1,
     width: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: Constants.statusBarHeight + 20,
-    backgroundColor: "#E1E7E4",
-  },
-  goBackButton: {
-    alignSelf: "flex-start",
-    marginLeft: 10,
-  },
-  goBackImage: {
-    width: 10,
-    height: 16,
-  },
-  container: {
     height: "100%",
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
+    paddingTop: Constants.statusBarHeight,
+    backgroundColor: colors.ice,
+  },
+  goBackButton: {
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+    height: "6%",
+    paddingLeft: 20,
+  },
+  container: {
+    width: "100%",
+    height: "88%",
+    display: "flex",
+    justifyContent: "center",
+  },
+  logoImageContent: {
+    height: "38%",
+    width: "100%",
   },
   logoImage: {
-    width: 240,
-    height: 255,
-    transform: [{ rotate: "20 deg" }],
-    position: "relative",
-    left: "-30%",
+    height: "100%",
+    resizeMode: "contain",
+    transform: [{ rotate: "-10 deg" }],
+    opacity: 0.1,
+    left: "-32%",
   },
   content: {
     display: "flex",
-    height: "40%",
-    justifyContent: "space-between",
+    height: "50%",
+    width: "100%",
+    justifyContent: "center",
     alignItems: "center",
   },
   formCadastro: {
     display: "flex",
     height: "100%",
-    justifyContent: "flex-start",
+    width: "65%",
+    justifyContent: "center",
     alignItems: "center",
   },
   inputTopText: {
@@ -52,30 +59,31 @@ const styles = StyleSheet.create({
   input: {
     height: 41,
     width: 242,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#aaa",
+    borderColor: colors.gray,
     marginBottom: 25,
   },
   nextButton: {
-    backgroundColor: "#f15a24",
-    width: 128,
-    height: 33,
-    borderRadius: 8,
-    alignItems: "center",
+    width: 242,
+    display: "flex",
     justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: 10,
+    borderRadius: 3,
+    backgroundColor: colors.secondaryBlue,
   },
   nextText: {
-    color: "#fff",
+    color: colors.light,
   },
   stepper: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: "25%",
-  },
-  icon: {
-    alignSelf: "baseline",
+    height: "6%",
+    width: 120,
   },
 });
 
