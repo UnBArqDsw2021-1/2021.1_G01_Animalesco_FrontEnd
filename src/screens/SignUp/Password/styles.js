@@ -31,11 +31,10 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   logoImage: {
-    height: "100%",
     resizeMode: "contain",
-    transform: [{ rotate: "-10 deg" }],
+    transform: [{ rotate: "0 deg" }],
     opacity: 0.1,
-    left: "-32%",
+    left: "-25%",
   },
   content: {
     display: "flex",

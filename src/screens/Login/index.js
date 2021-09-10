@@ -8,7 +8,6 @@ import {
   Text,
   TextInput,
   ActivityIndicator,
-  Button,
   Keyboard,
   TouchableOpacity,
 } from "react-native";
@@ -79,20 +78,20 @@ const Login = () => {
           source={require("@assets/images/logo_without_background.png")}
         />
         <View style={styles.inputContent}>
+          <Text style={styles.inputTopText}>Username</Text>
           <TextInput
-            keyboardType="email-address"
             style={styles.textInput}
-            placeholder="Email"
             autoCorrect={false}
             placeholderTextColor={colors.gray}
+            // onPressOut={}
             onChangeText={(email) => setEmail(email)}
             value={email}
           />
+          <Text style={styles.inputTopText}>Senha</Text>
           <TextInput
             style={styles.textInput}
             secureTextEntry
             placeholderTextColor={colors.gray}
-            placeholder="Senha"
             autoCorrect={false}
             onChangeText={(password) => setPassword(password)}
             value={password}

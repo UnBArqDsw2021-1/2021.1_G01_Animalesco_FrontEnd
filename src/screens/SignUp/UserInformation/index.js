@@ -6,10 +6,10 @@ import {
   View,
   Image,
   Text,
+  Keyboard,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Keyboard,
   Platform,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
@@ -22,7 +22,30 @@ const UserInformation = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
+
+  setStatusBarStyle("dark");
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true); // or some other action
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false); // or some other action
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   useEffect(() => {
     if (name && email) {
@@ -32,11 +55,18 @@ const UserInformation = () => {
     }
   }, [name, email]);
 
-  setStatusBarStyle("dark");
+  const WaterMark = () => (
+    <View style={styles.logoImageContent}>
+      <Image
+        style={styles.logoImage}
+        source={require("@assets/images/orange_mask_logo.png")}
+      />
+    </View>
+  );
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.page}>
+    <TouchableWithoutFeedback>
+      <View style={styles.page} onPress={Keyboard.dismiss}>
         <View style={styles.goBackButton}>
           <TouchableOpacity onPress={() => navigation.navigate("login")}>
             <AntDesign name="arrowleft" size={24} color={colors.primary} />
@@ -46,12 +76,7 @@ const UserInformation = () => {
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <View style={styles.logoImageContent}>
-            <Image
-              style={styles.logoImage}
-              source={require("@assets/images/orange_mask_logo.png")}
-            />
-          </View>
+          {!isKeyboardVisible && <WaterMark />}
           <View style={styles.content}>
             <View style={styles.formCadastro}>
               <Text style={styles.inputTopText}>Email</Text>

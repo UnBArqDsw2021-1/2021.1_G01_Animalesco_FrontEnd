@@ -21,8 +21,30 @@ const Password = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
+
   setStatusBarStyle("dark");
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true); // or some other action
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false); // or some other action
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   useEffect(() => {
     if (password && passwordConfirmation) {
@@ -31,6 +53,15 @@ const Password = () => {
       setButtonDisabled(true);
     }
   }, [password, passwordConfirmation]);
+
+  const WaterMark = () => (
+    <View style={styles.logoImageContent}>
+      <Image
+        style={styles.logoImage}
+        source={require("@assets/images/orange_mask_logo.png")}
+      />
+    </View>
+  );
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -76,12 +107,7 @@ const Password = () => {
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
-          <View style={styles.logoImageContent}>
-            <Image
-              style={styles.logoImage}
-              source={require("@assets/images/orange_mask_logo.png")}
-            />
-          </View>
+          {!isKeyboardVisible && <WaterMark />}
         </View>
         <View style={styles.stepper}>
           <Stepper step={2} />
