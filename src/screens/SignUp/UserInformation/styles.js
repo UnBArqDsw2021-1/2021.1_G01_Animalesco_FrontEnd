@@ -8,38 +8,21 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
     paddingTop: Constants.statusBarHeight,
     backgroundColor: colors.ice,
   },
-  goBackButton: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-    height: "6%",
-    paddingLeft: 20,
-  },
   container: {
-    height: "88%",
+    height: "100%",
     width: "100%",
     display: "flex",
     justifyContent: "center",
-  },
-  logoImageContent: {
-    height: "48%",
-    width: "100%",
-  },
-  logoImage: {
-    resizeMode: "contain",
-    transform: [{ rotate: "20 deg" }],
-    opacity: 0.1,
-    left: "-22%",
   },
   content: {
-    height: "40%",
+    height: "50%",
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
   },
   formCadastro: {
     display: "flex",
@@ -82,13 +65,6 @@ const styles = StyleSheet.create({
   },
   nextText: {
     color: colors.light,
-  },
-  stepper: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "6%",
-    width: 120,
   },
 });
 

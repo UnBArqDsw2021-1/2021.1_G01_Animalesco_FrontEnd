@@ -1,9 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Login from "./screens/Login";
-import UserInformation from "./screens/SignUp/UserInformation";
-import Password from "./screens/SignUp/Password";
-import Photo from "./screens/SignUp/Photo";
+import { Login, UserInformation, Password, Photo } from "@screens";
 
 const Stack = createStackNavigator();
 const Routes = () => {

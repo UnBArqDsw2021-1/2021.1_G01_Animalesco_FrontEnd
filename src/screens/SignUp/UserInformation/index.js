@@ -12,13 +12,12 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { Stepper } from "@components";
+import { Header, WaterMark } from "../components/index";
+
 import styles from "./styles.js";
-import colors from "@assets/styles/colors";
 
-import Stepper from "@components/Stepper.js";
-
-const UserInformation = () => {
+export const UserInformation = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -55,28 +54,15 @@ const UserInformation = () => {
     }
   }, [name, email]);
 
-  const WaterMark = () => (
-    <View style={styles.logoImageContent}>
-      <Image
-        style={styles.logoImage}
-        source={require("@assets/images/orange_mask_logo.png")}
-      />
-    </View>
-  );
-
   return (
-    <TouchableWithoutFeedback>
-      <View style={styles.page} onPress={Keyboard.dismiss}>
-        <View style={styles.goBackButton}>
-          <TouchableOpacity onPress={() => navigation.navigate("login")}>
-            <AntDesign name="arrowleft" size={24} color={colors.primary} />
-          </TouchableOpacity>
-        </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={styles.page}>
+        <Header navigate="login" />
         <KeyboardAvoidingView
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          {!isKeyboardVisible && <WaterMark />}
+          {!isKeyboardVisible && <WaterMark orientation="left" />}
           <View style={styles.content}>
             <View style={styles.formCadastro}>
               <Text style={styles.inputTopText}>Email</Text>
@@ -87,7 +73,7 @@ const UserInformation = () => {
                 onChangeText={setEmail}
                 value={email}
               />
-              <Text style={styles.inputTopText}>Nome</Text>
+              <Text style={styles.inputTopText}>Username</Text>
               <TextInput
                 style={styles.input}
                 onChangeText={setName}
@@ -105,12 +91,8 @@ const UserInformation = () => {
             </View>
           </View>
         </KeyboardAvoidingView>
-        <View style={styles.stepper}>
-          <Stepper step={1} />
-        </View>
+        <Stepper step={1} />
       </View>
     </TouchableWithoutFeedback>
   );
 };
-
-export default UserInformation;

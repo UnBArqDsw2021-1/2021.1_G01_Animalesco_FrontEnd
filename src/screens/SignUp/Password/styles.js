@@ -8,45 +8,27 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
     paddingTop: Constants.statusBarHeight,
     backgroundColor: colors.ice,
   },
-  goBackButton: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-    height: "6%",
-    paddingLeft: 20,
-  },
   container: {
     width: "100%",
-    height: "88%",
+    height: "100%",
     display: "flex",
     justifyContent: "center",
   },
-  logoImageContent: {
-    height: "38%",
-    width: "100%",
-  },
-  logoImage: {
-    resizeMode: "contain",
-    transform: [{ rotate: "0 deg" }],
-    opacity: 0.1,
-    left: "-25%",
-  },
   content: {
-    display: "flex",
     height: "50%",
     width: "100%",
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   formCadastro: {
     display: "flex",
     height: "100%",
-    width: "65%",
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -85,13 +67,6 @@ const styles = StyleSheet.create({
   },
   nextText: {
     color: colors.light,
-  },
-  stepper: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "6%",
-    width: 120,
   },
 });
 

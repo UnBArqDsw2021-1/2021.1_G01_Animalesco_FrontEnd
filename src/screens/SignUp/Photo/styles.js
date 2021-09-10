@@ -13,28 +13,10 @@ const styles = StyleSheet.create({
     paddingTop: Constants.statusBarHeight,
     backgroundColor: colors.ice,
   },
-  goBackButton: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-    height: "6%",
-    paddingLeft: 20,
-  },
-  goBackImage: {
-    width: 10,
-    height: 16,
-  },
   container: {
     height: "88%",
     display: "flex",
     justifyContent: "center",
-  },
-  logoImage: {
-    width: 240,
-    transform: [{ rotate: "-20 deg" }, { scaleX: -1 }],
-    position: "relative",
-    opacity: 0.1,
-    left: "30%",
   },
   content: {
     display: "flex",
@@ -73,13 +55,6 @@ const styles = StyleSheet.create({
   },
   nextText: {
     color: colors.light,
-  },
-  stepper: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "6%",
-    width: 120,
   },
   icon: {
     alignSelf: "baseline",

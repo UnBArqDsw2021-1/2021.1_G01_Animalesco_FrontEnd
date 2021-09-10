@@ -15,7 +15,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles.js";
 import colors from "@assets/styles/colors";
 
-const Login = () => {
+export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
@@ -114,5 +114,3 @@ const Login = () => {
     </LinearGradient>
   );
 };
-
-export default Login;

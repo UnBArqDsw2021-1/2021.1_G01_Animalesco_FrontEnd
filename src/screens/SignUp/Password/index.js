@@ -11,13 +11,12 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles.js";
-import colors from "@assets/styles/colors";
 
-import Stepper from "@components/Stepper.js";
+import { Stepper } from "@components";
+import { Header, WaterMark } from "../components/index";
 
-const Password = () => {
+export const Password = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -54,29 +53,11 @@ const Password = () => {
     }
   }, [password, passwordConfirmation]);
 
-  const WaterMark = () => (
-    <View style={styles.logoImageContent}>
-      <Image
-        style={styles.logoImage}
-        source={require("@assets/images/orange_mask_logo.png")}
-      />
-    </View>
-  );
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <View style={styles.goBackButton}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("userinformation")}
-          >
-            <AntDesign name="arrowleft" size={24} color={colors.primary} />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
+        <Header navigate="userinformation" />
+        <View style={styles.container}>
           <KeyboardAvoidingView
             style={styles.content}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -107,14 +88,10 @@ const Password = () => {
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
-          {!isKeyboardVisible && <WaterMark />}
+          {!isKeyboardVisible && <WaterMark orientation="left" />}
         </View>
-        <View style={styles.stepper}>
-          <Stepper step={2} />
-        </View>
+        <Stepper step={2} />
       </View>
     </TouchableWithoutFeedback>
   );
 };
-
-export default Password;
