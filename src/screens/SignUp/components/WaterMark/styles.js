@@ -8,16 +8,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logoImageLeft: {
+    height: 260,
     resizeMode: "contain",
     transform: [{ rotate: "20 deg" }],
     opacity: 0.1,
-    left: "-22%",
+    left: "-26%",
   },
   logoImageRight: {
+    height: 260,
     resizeMode: "contain",
     transform: [{ rotate: "-20 deg" }, { scaleX: -1 }],
     opacity: 0.1,
-    left: "30%",
+    left: "35%",
   },
 });
 
