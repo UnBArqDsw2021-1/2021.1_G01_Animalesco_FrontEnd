@@ -14,26 +14,35 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles.js";
 import colors from "@assets/styles/colors";
+import { validateUsername, validatePassword } from "@utilites";
+import { Alert } from "@components";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [erro, setErro] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
   const navigation = useNavigation();
   setStatusBarStyle("light");
 
   useEffect(() => {
-    if (email && password) {
+    if (username && password) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [email, password, buttonDisabled]);
+  }, [username, password, buttonDisabled]);
 
   const loginHandler = async () => {
+    setErro("");
+    if (!validateUsername(username) || !validatePassword(password)) {
+      setErro("Senha ou Username incorretos");
+      return;
+    }
+
     setLoadingLoginRequest(true);
-    const data = { email: email.trim(), password };
+    const data = { username, password };
     Keyboard.dismiss;
     setLoadingLoginRequest(true);
     // aqui entrará o post para a api
@@ -83,9 +92,8 @@ export const Login = () => {
             style={styles.textInput}
             autoCorrect={false}
             placeholderTextColor={colors.gray}
-            // onPressOut={}
-            onChangeText={(email) => setEmail(email)}
-            value={email}
+            onChangeText={(username) => setUsername(username)}
+            value={username}
           />
           <Text style={styles.inputTopText}>Senha</Text>
           <TextInput
@@ -96,10 +104,11 @@ export const Login = () => {
             onChangeText={(password) => setPassword(password)}
             value={password}
           />
+          {erro !== "" && <Alert message={erro} />}
           <View style={styles.viewBtn}>
-            <TouchableOpacity style={styles.forgotPasswordButton}>
+            {/* <TouchableOpacity style={styles.forgotPasswordButton}>
               <Text style={styles.forgotPasswordtext}>Esqueceu a senha?</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <View style={styles.login}>
               {loadingLoginRequest
                 ? renderLoadingIndicator()

@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
-  Image,
   Text,
   TextInput,
   TouchableOpacity,
@@ -13,12 +12,14 @@ import {
 } from "react-native";
 import styles from "./styles.js";
 
-import { Stepper } from "@components";
+import { validatePassword } from "@utilites";
+import { Stepper, Alert } from "@components";
 import { Header, WaterMark } from "../components/index";
 
 export const Password = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [erro, setErro] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
@@ -53,6 +54,21 @@ export const Password = () => {
     }
   }, [password, passwordConfirmation]);
 
+  const submitHandler = () => {
+    setErro("");
+    if (!validatePassword(password)) {
+      setErro("Senha deverá ter entre 5 e 25 caracteres");
+      return;
+    }
+    if (password !== passwordConfirmation) {
+      setErro(
+        "Senha de confirmação diferente. Os dois campos devem conter a mesma senha"
+      );
+      return;
+    }
+    navigation.navigate("photo");
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
@@ -77,11 +93,12 @@ export const Password = () => {
                 value={passwordConfirmation}
                 secureTextEntry={true}
               />
+              {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
                   buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
                 }
-                onPress={() => navigation.navigate("photo")}
+                onPress={submitHandler}
                 disabled={buttonDisabled}
               >
                 <Text style={styles.nextText}>Próximo</Text>

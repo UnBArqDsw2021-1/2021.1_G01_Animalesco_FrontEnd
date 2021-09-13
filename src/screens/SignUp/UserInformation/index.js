@@ -4,7 +4,6 @@ import { useNavigation } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
-  Image,
   Text,
   Keyboard,
   TextInput,
@@ -12,14 +11,16 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { Stepper } from "@components";
+import { Stepper, Alert } from "@components";
+import { validateUsername, validateEmail } from "@utilites";
 import { Header, WaterMark } from "../components/index";
 
 import styles from "./styles.js";
 
 export const UserInformation = () => {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [erro, setErro] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
@@ -47,12 +48,25 @@ export const UserInformation = () => {
   }, []);
 
   useEffect(() => {
-    if (name && email) {
+    if (username && email) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [name, email]);
+  }, [username, email]);
+
+  const submitHandler = () => {
+    setErro("");
+    if (!validateEmail(email)) {
+      setErro("Email inválido. Verifique o formato do email");
+      return;
+    }
+    if (!validateUsername(username)) {
+      setErro("Username deverá apenas letras e números");
+      return;
+    }
+    navigation.navigate("password");
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -76,15 +90,16 @@ export const UserInformation = () => {
               <Text style={styles.inputTopText}>Username</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={setName}
-                value={name}
+                onChangeText={setUsername}
+                value={username}
               />
+              {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
                   buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
                 }
                 disabled={buttonDisabled}
-                onPress={() => navigation.navigate("password")}
+                onPress={submitHandler}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>
