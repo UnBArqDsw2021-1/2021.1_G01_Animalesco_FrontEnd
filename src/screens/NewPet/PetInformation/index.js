@@ -12,7 +12,7 @@ import {
   Platform,
 } from "react-native";
 import { Stepper, Alert } from "@components";
-import { Header, WaterMark } from "../../SignUp/components/index";
+import { Header, WaterMark } from "../components/index";
 
 import styles from "./styles.js";
 

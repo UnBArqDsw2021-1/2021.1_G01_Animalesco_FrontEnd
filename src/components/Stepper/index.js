@@ -17,9 +17,9 @@ export const Stepper = ({ nuSteps, step }) => {
       <View style={styles.content}>
         {numberOfSteps.map((element) =>
           step === element ? (
-            <Image source={filledBall} />
+            <Image key={element} source={filledBall} />
           ) : (
-            <Image source={unfilledBall} />
+            <Image key={element} source={unfilledBall} />
           )
         )}
       </View>

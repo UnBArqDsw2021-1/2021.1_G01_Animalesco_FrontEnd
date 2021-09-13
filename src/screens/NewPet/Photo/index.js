@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
@@ -15,10 +16,11 @@ import styles from "./styles.js";
 import colors from "@assets/styles/colors";
 
 import { Stepper } from "@components";
-import { Header, WaterMark } from "../../SignUp/components/index";
+import { Header, WaterMark } from "../components/index";
 
 export const PetPhoto = () => {
   const [image, setImage] = useState(null);
+  const navigation = useNavigation();
 
   setStatusBarStyle("dark");
 
@@ -72,7 +74,7 @@ export const PetPhoto = () => {
               )}
               <TouchableOpacity
                 style={styles.nextButton}
-                onPress={() => navigation.navigate("bithheight")}
+                onPress={() => navigation.navigate("birthheight")}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>

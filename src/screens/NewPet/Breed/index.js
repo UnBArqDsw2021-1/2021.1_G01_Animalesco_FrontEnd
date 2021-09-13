@@ -13,7 +13,7 @@ import {
 import styles from "./styles.js";
 
 import { Stepper, Alert } from "@components";
-import { Header, WaterMark } from "../../SignUp/components/index";
+import { Header, WaterMark } from "../components/index";
 
 export const Breed = () => {
   const [breed, setBreed] = useState("");

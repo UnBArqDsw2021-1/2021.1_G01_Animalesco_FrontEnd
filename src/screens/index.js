@@ -6,3 +6,4 @@ export { Home } from "./Home";
 export { PetInformation } from "./NewPet/PetInformation";
 export { Breed } from "./NewPet/Breed";
 export { PetPhoto } from "./NewPet/Photo";
+export { BirthHeight } from "./NewPet/BirthHeight";
