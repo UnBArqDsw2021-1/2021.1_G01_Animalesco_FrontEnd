@@ -5,10 +5,14 @@ const colors = {
   secondaryGreen: "#006837",
   primaryBlue: "#00a99d",
   secondaryBlue: "#0071bc",
-  danger: "#e47171",
+  danger: "#f44336",
+  dangerDark: "#78241e",
+  dangerLight: "#f4433633",
   dark: "#353535",
   gray: "#35353554",
+  grayLight: "#35353514",
   light: "#f7f7f7",
+  ice: "#E1E7E4",
 };
 
 export default colors;
