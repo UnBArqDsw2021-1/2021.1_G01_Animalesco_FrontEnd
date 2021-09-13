@@ -106,7 +106,7 @@ export const UserInformation = () => {
             </View>
           </View>
         </KeyboardAvoidingView>
-        <Stepper step={1} />
+        <Stepper step={1} nuSteps={3} />
       </View>
     </TouchableWithoutFeedback>
   );
