@@ -7,6 +7,7 @@ import {
   Photo,
   Home,
   PetInformation,
+  Breed,
 } from "@screens";
 
 const Stack = createStackNavigator();
@@ -24,6 +25,7 @@ const Routes = () => {
       <Stack.Screen name="photo" component={Photo} />
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="petinformation" component={PetInformation} />
+      <Stack.Screen name="breed" component={Breed} />
     </Stack.Navigator>
   );
 };

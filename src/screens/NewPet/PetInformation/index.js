@@ -18,7 +18,7 @@ import styles from "./styles.js";
 
 export const PetInformation = () => {
   const [name, setName] = useState("");
-  const [breed, setBreed] = useState("");
+  const [species, setSpecies] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
@@ -46,17 +46,17 @@ export const PetInformation = () => {
   }, []);
 
   useEffect(() => {
-    if (breed && name) {
+    if (species && name) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [breed, name]);
+  }, [species, name]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <Header navigate="login" />
+        <Header navigate="home" />
         <KeyboardAvoidingView
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -75,15 +75,15 @@ export const PetInformation = () => {
               <Text style={styles.inputTopText}>Espécie</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={setBreed}
-                value={breed}
+                onChangeText={setSpecies}
+                value={species}
               />
               <TouchableOpacity
                 style={
                   buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
                 }
                 disabled={buttonDisabled}
-                onPress={() => navigation.navigate("")}
+                onPress={() => navigation.navigate("breed")}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>
