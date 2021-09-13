@@ -12,8 +12,6 @@ export const Stepper = ({ nuSteps, step }) => {
     numberOfSteps.push(i + 1);
   }
 
-  console.log(numberOfSteps, step, step === numberOfSteps[2]);
-
   return (
     <View style={styles.container}>
       <View style={styles.content}>

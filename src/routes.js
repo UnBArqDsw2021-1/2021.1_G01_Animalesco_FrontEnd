@@ -1,6 +1,13 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Login, UserInformation, Password, Photo, Home } from "@screens";
+import {
+  Login,
+  UserInformation,
+  Password,
+  Photo,
+  Home,
+  PetInformation,
+} from "@screens";
 
 const Stack = createStackNavigator();
 const Routes = () => {
@@ -16,6 +23,7 @@ const Routes = () => {
       <Stack.Screen name="password" component={Password} />
       <Stack.Screen name="photo" component={Photo} />
       <Stack.Screen name="home" component={Home} />
+      <Stack.Screen name="petinformation" component={PetInformation} />
     </Stack.Navigator>
   );
 };

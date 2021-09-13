@@ -16,7 +16,7 @@ export const Home = () => {
       <View>
         <TouchableOpacity
           style={styles.newPet}
-          onPress={() => navigation.navigate("newPet")}
+          onPress={() => navigation.navigate("petinformation")}
         >
           <Text>Teste</Text>
         </TouchableOpacity>
