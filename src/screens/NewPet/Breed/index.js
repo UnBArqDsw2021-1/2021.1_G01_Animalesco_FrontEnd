@@ -17,7 +17,6 @@ import { Header, WaterMark } from "../../SignUp/components/index";
 
 export const Breed = () => {
   const [breed, setBreed] = useState("");
-  const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
 
@@ -43,14 +42,6 @@ export const Breed = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (breed) {
-      setButtonDisabled(false);
-    } else {
-      setButtonDisabled(true);
-    }
-  }, [breed]);
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
@@ -69,11 +60,8 @@ export const Breed = () => {
                 secureTextEntry={true}
               />
               <TouchableOpacity
-                style={
-                  buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
-                }
-                onPress={() => navigation.navigate("")}
-                disabled={buttonDisabled}
+                style={styles.nextButton}
+                onPress={() => navigation.navigate("petphoto")}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>
@@ -81,7 +69,7 @@ export const Breed = () => {
           </KeyboardAvoidingView>
           {!isKeyboardVisible && <WaterMark orientation="right" />}
         </View>
-        <Stepper step={2} />
+        <Stepper step={2} nuSteps={4} />
       </View>
     </TouchableWithoutFeedback>
   );
