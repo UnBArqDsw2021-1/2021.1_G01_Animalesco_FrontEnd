@@ -24,21 +24,6 @@ export const Stepper = ({ nuSteps, step }) => {
             <Image source={unfilledBall} />
           )
         )}
-        {/* {step === 1 ? (
-          <Image source={filledBall} />
-        ) : (
-          <Image source={unfilledBall} />
-        )}
-        {step === 2 ? (
-          <Image source={filledBall} />
-        ) : (
-          <Image source={unfilledBall} />
-        )}
-        {step === 3 ? (
-          <Image source={filledBall} />
-        ) : (
-          <Image source={unfilledBall} />
-        )} */}
       </View>
     </View>
   );

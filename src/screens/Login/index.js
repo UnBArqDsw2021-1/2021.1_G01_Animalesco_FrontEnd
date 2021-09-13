@@ -34,22 +34,22 @@ export const Login = () => {
     }
   }, [username, password, buttonDisabled]);
 
-  const loginHandler = async () => {
-    setErro("");
-    if (!validateUsername(username) || !validatePassword(password)) {
-      setErro("Senha ou Username incorretos");
-      return;
-    }
+  // const loginHandler = async () => {
+  //   setErro("");
+  //   if (!validateUsername(username) || !validatePassword(password)) {
+  //     setErro("Senha ou Username incorretos");
+  //     return;
+  //   }
 
-    setLoadingLoginRequest(true);
-    const data = { username, password };
-    Keyboard.dismiss;
-    setLoadingLoginRequest(true);
-    // aqui entrará o post para a api
+  //   setLoadingLoginRequest(true);
+  //   const data = { username, password };
+  //   Keyboard.dismiss;
+  //   setLoadingLoginRequest(true);
+  //   // aqui entrará o post para a api
 
-    // await useService(SessionService, "signIn", [data]);
-    setLoadingLoginRequest(false);
-  };
+  //   // await useService(SessionService, "signIn", [data]);
+  //   setLoadingLoginRequest(false);
+  // };
 
   const renderLoadingIndicator = () => (
     <ActivityIndicator size="large" color={colors.light} />
@@ -61,7 +61,8 @@ export const Login = () => {
         buttonDisabled ? styles.contentButtonDisabled : styles.contentButton
       }
       disabled={buttonDisabled || loadingLoginRequest}
-      onPress={loginHandler}
+      // onPress={loginHandler}
+      onPress={() => navigation.navigate("home")}
     >
       <Text style={styles.button}>ENTRAR</Text>
     </TouchableOpacity>

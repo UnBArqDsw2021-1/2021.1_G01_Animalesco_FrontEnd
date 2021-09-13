@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { Login, UserInformation, Password, Photo } from "@screens";
+import { Login, UserInformation, Password, Photo, Home } from "@screens";
 
 const Stack = createStackNavigator();
 const Routes = () => {
@@ -15,6 +15,7 @@ const Routes = () => {
       <Stack.Screen name="userinformation" component={UserInformation} />
       <Stack.Screen name="password" component={Password} />
       <Stack.Screen name="photo" component={Photo} />
+      <Stack.Screen name="home" component={Home} />
     </Stack.Navigator>
   );
 };
