@@ -14,8 +14,11 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles.js";
 import colors from "@assets/styles/colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { validateUsername, validatePassword } from "@utilites";
 import { Alert } from "@components";
+import { loginService, useService } from "@services";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -34,22 +37,41 @@ export const Login = () => {
     }
   }, [username, password, buttonDisabled]);
 
-  // const loginHandler = async () => {
-  //   setErro("");
-  //   if (!validateUsername(username) || !validatePassword(password)) {
-  //     setErro("Senha ou Username incorretos");
-  //     return;
-  //   }
+  const loginHandler = async () => {
+    setErro("");
+    if (!validateUsername(username) || !validatePassword(password)) {
+      setErro("Senha ou username incorretos");
+      return;
+    }
 
-  //   setLoadingLoginRequest(true);
-  //   const data = { username, password };
-  //   Keyboard.dismiss;
-  //   setLoadingLoginRequest(true);
-  //   // aqui entrará o post para a api
+    setLoadingLoginRequest(true);
+    const data = { username, password };
+    Keyboard.dismiss;
+    setLoadingLoginRequest(true);
+    // aqui entrará o post para a api
 
-  //   // await useService(SessionService, "signIn", [data]);
-  //   setLoadingLoginRequest(false);
-  // };
+    const response = await useService(loginService, "getToken", [data]);
+
+    if (response.error) {
+      setErro("Senha ou username incorretos");
+      setLoadingLoginRequest(false);
+      return;
+    } else {
+      try {
+        await AsyncStorage.setItem(
+          "@animalesco:auth_token",
+          response.data.auth_token
+        );
+      } catch (e) {
+        setErro("Erro ao efetuar o login, tente novamente");
+        setLoadingLoginRequest(false);
+        return;
+      }
+    }
+
+    setLoadingLoginRequest(false);
+    navigation.navigate("home");
+  };
 
   const renderLoadingIndicator = () => (
     <ActivityIndicator size="large" color={colors.light} />
@@ -61,8 +83,8 @@ export const Login = () => {
         buttonDisabled ? styles.contentButtonDisabled : styles.contentButton
       }
       disabled={buttonDisabled || loadingLoginRequest}
-      // onPress={loginHandler}
-      onPress={() => navigation.navigate("home")}
+      onPress={loginHandler}
+      // onPress={() => navigation.navigate("home")}
     >
       <Text style={styles.button}>ENTRAR</Text>
     </TouchableOpacity>

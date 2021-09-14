@@ -10,6 +10,7 @@
           "@components": "./src/components/index",
           "@screens": "./src/screens/index",
           "@utilites": "./src/utilites/index",
+          "@services": "./src/services/index",
           "@assets": "./assets"
         }
       }
