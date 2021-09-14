@@ -56,11 +56,10 @@ export const Breed = () => {
                 style={styles.input}
                 onChangeText={setBreed}
                 value={breed}
-                secureTextEntry={true}
               />
               <TouchableOpacity
                 style={styles.nextButton}
-                onPress={() => navigation.navigate("petphoto")}
+                onPress={() => navigation.navigate("birthheight")}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>

@@ -18,7 +18,7 @@ export const Home = () => {
           style={styles.newPet}
           onPress={() => navigation.navigate("petinformation")}
         >
-          <Text>Teste</Text>
+          <Text>Cadastrar novo pet</Text>
         </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>

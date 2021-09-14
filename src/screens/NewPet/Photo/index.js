@@ -73,14 +73,14 @@ export const PetPhoto = () => {
               )}
               <TouchableOpacity
                 style={styles.nextButton}
-                onPress={() => navigation.navigate("birthheight")}
+                onPress={() => navigation.navigate("")}
               >
-                <Text style={styles.nextText}>Próximo</Text>
+                <Text style={styles.nextText}>Enviar</Text>
               </TouchableOpacity>
             </View>
           </View>
         </KeyboardAvoidingView>
-        <Stepper step={3} nuSteps={4} />
+        <Stepper step={4} nuSteps={4} />
       </View>
     </TouchableWithoutFeedback>
   );

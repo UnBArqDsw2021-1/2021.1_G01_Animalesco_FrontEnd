@@ -54,7 +54,7 @@ export const BirthHeight = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <GoBackHeader navigate="petphoto" />
+        <GoBackHeader navigate="breed" />
         <View style={styles.container}>
           <KeyboardAvoidingView
             style={styles.content}
@@ -66,29 +66,30 @@ export const BirthHeight = () => {
                 style={styles.input}
                 onChangeText={setBirthDate}
                 value={birthDate}
-                secureTextEntry={true}
+                placeholder="dd/mm/yyyy"
+                keyboardType="numeric"
               />
-              <Text style={styles.inputTopText}>Altura</Text>
+              <Text style={styles.inputTopText}>Altura (m)</Text>
               <TextInput
                 style={styles.input}
                 onChangeText={setPetHeigth}
                 value={petHeigth}
-                secureTextEntry={true}
+                keyboardType="numeric"
               />
               <TouchableOpacity
                 style={
-                  buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
+                  buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
                 }
                 disabled={buttonDisabled}
                 onPress={() => navigation.navigate("petphoto")}
               >
-                <Text style={styles.nextText}>Enviar</Text>
+                <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
           {!isKeyboardVisible && <WaterMark orientation="left" />}
         </View>
-        <Stepper step={4} nuSteps={4} />
+        <Stepper step={3} nuSteps={4} />
       </View>
     </TouchableWithoutFeedback>
   );
