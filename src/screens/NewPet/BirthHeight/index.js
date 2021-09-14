@@ -12,11 +12,18 @@ import {
 } from "react-native";
 import styles from "./styles.js";
 
-import { Stepper, GoBackHeader, WaterMark } from "@components";
+import { Stepper, GoBackHeader, WaterMark, Alert } from "@components";
+import {
+  validateDate,
+  formatDate,
+  validatePetBirthDay,
+  validateHeight,
+} from "@utilites";
 
 export const BirthHeight = () => {
   const [birthDate, setBirthDate] = useState("");
   const [petHeigth, setPetHeigth] = useState("");
+  const [erro, setErro] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
@@ -51,6 +58,19 @@ export const BirthHeight = () => {
     }
   }, [birthDate, petHeigth]);
 
+  const submitHandler = () => {
+    setErro("");
+    if (!validateDate(birthDate) || !validatePetBirthDay(birthDate)) {
+      setErro("Data inválida");
+      return;
+    }
+    if (!validateHeight(petHeigth)) {
+      setErro("Altura inválida");
+      return;
+    }
+    navigation.navigate("petphoto");
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
@@ -64,9 +84,11 @@ export const BirthHeight = () => {
               <Text style={styles.inputTopText}>Data de nascimento</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={setBirthDate}
+                onChangeText={(value) => {
+                  setBirthDate(formatDate(value));
+                }}
                 value={birthDate}
-                placeholder="dd/mm/yyyy"
+                placeholder="dd/mm/aaaa"
                 keyboardType="numeric"
               />
               <Text style={styles.inputTopText}>Altura (m)</Text>
@@ -76,12 +98,13 @@ export const BirthHeight = () => {
                 value={petHeigth}
                 keyboardType="numeric"
               />
+              {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
                   buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
                 }
                 disabled={buttonDisabled}
-                onPress={() => navigation.navigate("petphoto")}
+                onPress={submitHandler}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>
