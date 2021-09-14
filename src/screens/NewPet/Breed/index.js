@@ -12,8 +12,7 @@ import {
 } from "react-native";
 import styles from "./styles.js";
 
-import { Stepper, Alert } from "@components";
-import { Header, WaterMark } from "../components/index";
+import { Stepper, GoBackHeader, WaterMark } from "@components";
 
 export const Breed = () => {
   const [breed, setBreed] = useState("");
@@ -45,7 +44,7 @@ export const Breed = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <Header navigate="petinformation" />
+        <GoBackHeader navigate="petinformation" />
         <View style={styles.container}>
           <KeyboardAvoidingView
             style={styles.content}

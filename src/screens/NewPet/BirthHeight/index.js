@@ -12,8 +12,7 @@ import {
 } from "react-native";
 import styles from "./styles.js";
 
-import { Stepper, Alert } from "@components";
-import { Header, WaterMark } from "../components/index";
+import { Stepper, GoBackHeader, WaterMark } from "@components";
 
 export const BirthHeight = () => {
   const [birthDate, setBirthDate] = useState("");
@@ -55,7 +54,7 @@ export const BirthHeight = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <Header navigate="petphoto" />
+        <GoBackHeader navigate="petphoto" />
         <View style={styles.container}>
           <KeyboardAvoidingView
             style={styles.content}

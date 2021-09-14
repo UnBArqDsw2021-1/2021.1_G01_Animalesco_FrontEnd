@@ -11,8 +11,7 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { Stepper, Alert } from "@components";
-import { Header, WaterMark } from "../components/index";
+import { Stepper, GoBackHeader, WaterMark } from "@components";
 
 import styles from "./styles.js";
 
@@ -56,7 +55,7 @@ export const PetInformation = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <Header navigate="home" />
+        <GoBackHeader navigate="home" />
         <KeyboardAvoidingView
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}

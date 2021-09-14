@@ -1,2 +1,4 @@
-export { Stepper } from "./Stepper/index";
-export { Alert } from "./Alert/index";
+export { GoBackHeader } from "./GoBackHeader";
+export { WaterMark } from "./WaterMark";
+export { Stepper } from "./Stepper";
+export { Alert } from "./Alert";

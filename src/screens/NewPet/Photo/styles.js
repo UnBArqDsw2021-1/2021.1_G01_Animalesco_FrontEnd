@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.ice,
   },
   container: {
+    width: "100%",
     height: "88%",
     display: "flex",
     justifyContent: "center",
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   formCadastro: {
     display: "flex",
     height: "100%",
-    width: "80%",
+    width: "65%",
     justifyContent: "flex-start",
     alignItems: "center",
   },
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 41,
-    width: 242,
+    width: "100%",
     borderRadius: 5,
     borderWidth: 1,
     borderColor: colors.gray,

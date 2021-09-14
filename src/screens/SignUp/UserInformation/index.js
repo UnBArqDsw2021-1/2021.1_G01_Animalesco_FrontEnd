@@ -11,9 +11,8 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { Stepper, Alert } from "@components";
+import { Stepper, Alert, GoBackHeader, WaterMark } from "@components";
 import { validateUsername, validateEmail } from "@utilites";
-import { Header, WaterMark } from "../components/index";
 
 import styles from "./styles.js";
 
@@ -71,7 +70,7 @@ export const UserInformation = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <Header navigate="login" />
+        <GoBackHeader navigate="login" />
         <KeyboardAvoidingView
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}

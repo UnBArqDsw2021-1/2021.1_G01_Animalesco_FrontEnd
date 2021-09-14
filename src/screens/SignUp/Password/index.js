@@ -13,8 +13,7 @@ import {
 import styles from "./styles.js";
 
 import { validatePassword } from "@utilites";
-import { Stepper, Alert } from "@components";
-import { Header, WaterMark } from "../components/index";
+import { Stepper, Alert, GoBackHeader, WaterMark } from "@components";
 
 export const Password = () => {
   const [password, setPassword] = useState("");
@@ -72,7 +71,7 @@ export const Password = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <Header navigate="userinformation" />
+        <GoBackHeader navigate="userinformation" />
         <View style={styles.container}>
           <KeyboardAvoidingView
             style={styles.content}

@@ -14,8 +14,7 @@ import * as ImagePicker from "expo-image-picker";
 import styles from "./styles.js";
 import colors from "@assets/styles/colors";
 
-import { Stepper } from "@components";
-import { Header, WaterMark } from "../components/index";
+import { Stepper, GoBackHeader, WaterMark } from "@components";
 
 export const Photo = () => {
   const [image, setImage] = useState(null);
@@ -50,7 +49,7 @@ export const Photo = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <Header navigate="password" />
+        <GoBackHeader navigate="password" />
         <KeyboardAvoidingView
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}

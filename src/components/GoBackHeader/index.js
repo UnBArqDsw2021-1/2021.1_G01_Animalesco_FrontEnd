@@ -5,7 +5,7 @@ import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles.js";
 import colors from "@assets/styles/colors";
 
-export const Header = ({ navigate }) => {
+export const GoBackHeader = ({ navigate }) => {
   const navigation = useNavigation();
 
   return (

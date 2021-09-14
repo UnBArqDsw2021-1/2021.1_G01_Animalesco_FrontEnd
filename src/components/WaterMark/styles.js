@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     transform: [{ rotate: "-20 deg" }, { scaleX: -1 }],
     opacity: 0.1,
-    left: "35%",
+    left: "42%",
   },
 });
 
