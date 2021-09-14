@@ -64,7 +64,7 @@ export const UserInformation = () => {
       setErro("Username deverá apenas letras e números");
       return;
     }
-    navigation.navigate("password");
+    navigation.navigate("password", { email, username });
   };
 
   return (

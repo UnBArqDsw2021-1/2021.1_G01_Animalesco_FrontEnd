@@ -90,10 +90,6 @@ export const Login = () => {
     </TouchableOpacity>
   );
 
-  const handleSignUp = () => {
-    navigation.navigate("userinformation");
-  };
-
   return (
     <LinearGradient
       style={styles.container}
@@ -137,7 +133,10 @@ export const Login = () => {
                 ? renderLoadingIndicator()
                 : renderLoginButton()}
             </View>
-            <TouchableOpacity style={styles.signUP} onPress={handleSignUp}>
+            <TouchableOpacity
+              style={styles.signUP}
+              onPress={() => navigation.navigate("userinformation")}
+            >
               <Text style={styles.signupText}>Criar Conta</Text>
             </TouchableOpacity>
           </View>

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
   Image,
   Text,
+  ActivityIndicator,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
@@ -14,10 +16,17 @@ import * as ImagePicker from "expo-image-picker";
 import styles from "./styles.js";
 import colors from "@assets/styles/colors";
 
-import { Stepper, GoBackHeader, WaterMark } from "@components";
+import { Stepper, GoBackHeader, WaterMark, Alert } from "@components";
+import { userService, useService } from "@services";
 
 export const Photo = () => {
+  const [signUpRequest, setSignUpRequest] = useState(false);
+  const [erro, setErro] = useState("");
   const [image, setImage] = useState(null);
+
+  const navigation = useNavigation();
+  const routes = useRoute();
+  const { email, username, password, passwordConfirmation } = routes.params;
 
   setStatusBarStyle("dark");
 
@@ -46,6 +55,29 @@ export const Photo = () => {
     }
   };
 
+  const signUpHandler = async () => {
+    setErro("");
+    setSignUpRequest(true);
+
+    data = {
+      username: username,
+      password: password,
+      re_password: passwordConfirmation,
+      email: email,
+    };
+
+    const response = await useService(userService, "createUser", [data]);
+
+    if (response.error) {
+      setErro("Error no cadastro. Tente novamente mais tarde");
+      setSignUpRequest(false);
+      return;
+    }
+
+    setSignUpRequest(false);
+    navigation.navigate("login");
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
@@ -69,9 +101,17 @@ export const Photo = () => {
                   />
                 </View>
               )}
-              <TouchableOpacity style={styles.nextButton}>
-                <Text style={styles.nextText}>Finalizar Cadastro</Text>
-              </TouchableOpacity>
+              {erro !== "" && <Alert message={erro} />}
+              {signUpRequest ? (
+                <ActivityIndicator size="large" color={colors.light} />
+              ) : (
+                <TouchableOpacity
+                  style={styles.submitButton}
+                  onPress={signUpHandler}
+                >
+                  <Text style={styles.submitText}>Finalizar Cadastro</Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </KeyboardAvoidingView>

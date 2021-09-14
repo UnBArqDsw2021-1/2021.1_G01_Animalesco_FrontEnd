@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
   Text,
   TextInput,
+  ActivityIndicator,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
@@ -21,7 +22,10 @@ export const Password = () => {
   const [erro, setErro] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
   const navigation = useNavigation();
+  const routes = useRoute();
+  const { email, username } = routes.params;
 
   setStatusBarStyle("dark");
 
@@ -65,7 +69,12 @@ export const Password = () => {
       );
       return;
     }
-    navigation.navigate("photo");
+    navigation.navigate("photo", {
+      email,
+      username,
+      password,
+      passwordConfirmation,
+    });
   };
 
   return (
