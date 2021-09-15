@@ -9,8 +9,10 @@ api.interceptors.request.use(
   async (config) => {
     let accessToken = await AsyncStorage.getItem("@animalesco:auth_token");
 
-    config.headers.authorization = `token ${accessToken}`;
-    return config;
+    if (accessToken) {
+      config.headers.Authorization = `token ${accessToken}`;
+      return config;
+    }
   },
   (error) => {
     console.log(error);
