@@ -5,6 +5,7 @@ import UserInformation from "./screens/SignUp/UserInformation";
 import Password from "./screens/SignUp/Password";
 import Photo from "./screens/SignUp/Photo";
 import RegisterVaccine from "./screens/RegisterVaccine";
+import Main from "./screens/Main";
 
 const Stack = createStackNavigator();
 const Routes = () => {
@@ -17,6 +18,8 @@ const Routes = () => {
     >
       
       <Stack.Screen name= "RegisterVaccine" component={RegisterVaccine}/>
+      <Stack.Screen name= "Main" component={Main}/>
+
     </Stack.Navigator>
   );
 };
