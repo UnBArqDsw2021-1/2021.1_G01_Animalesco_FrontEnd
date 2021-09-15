@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
+import { useNavigation } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
@@ -16,8 +17,9 @@ import colors from "@assets/styles/colors";
 
 import { Stepper, GoBackHeader, WaterMark } from "@components";
 
-export const Photo = () => {
+export const PetPhoto = () => {
   const [image, setImage] = useState(null);
+  const navigation = useNavigation();
 
   setStatusBarStyle("dark");
 
@@ -49,7 +51,7 @@ export const Photo = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <GoBackHeader navigate="password" />
+        <GoBackHeader navigate="birthheight" />
         <KeyboardAvoidingView
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -69,13 +71,16 @@ export const Photo = () => {
                   />
                 </View>
               )}
-              <TouchableOpacity style={styles.nextButton}>
-                <Text style={styles.nextText}>Finalizar Cadastro</Text>
+              <TouchableOpacity
+                style={styles.nextButton}
+                onPress={() => navigation.navigate("")}
+              >
+                <Text style={styles.nextText}>Enviar</Text>
               </TouchableOpacity>
             </View>
           </View>
         </KeyboardAvoidingView>
-        <Stepper step={3} />
+        <Stepper step={4} nuSteps={4} />
       </View>
     </TouchableWithoutFeedback>
   );

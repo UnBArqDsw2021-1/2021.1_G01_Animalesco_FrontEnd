@@ -11,15 +11,13 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { Stepper, Alert, GoBackHeader, WaterMark } from "@components";
-import { validateUsername, validateEmail } from "@utilites";
+import { Stepper, GoBackHeader, WaterMark } from "@components";
 
 import styles from "./styles.js";
 
-export const UserInformation = () => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [erro, setErro] = useState("");
+export const PetInformation = () => {
+  const [name, setName] = useState("");
+  const [species, setSpecies] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
@@ -47,30 +45,17 @@ export const UserInformation = () => {
   }, []);
 
   useEffect(() => {
-    if (username && email) {
+    if (species && name) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [username, email]);
-
-  const submitHandler = () => {
-    setErro("");
-    if (!validateEmail(email)) {
-      setErro("Email inválido. Verifique o formato do email");
-      return;
-    }
-    if (!validateUsername(username)) {
-      setErro("Username deverá apenas letras e números");
-      return;
-    }
-    navigation.navigate("password");
-  };
+  }, [species, name]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <GoBackHeader navigate="login" />
+        <GoBackHeader navigate="home" />
         <KeyboardAvoidingView
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -78,34 +63,33 @@ export const UserInformation = () => {
           {!isKeyboardVisible && <WaterMark orientation="left" />}
           <View style={styles.content}>
             <View style={styles.formCadastro}>
-              <Text style={styles.inputTopText}>Email</Text>
+              <Text style={styles.inputTopText}>Nome</Text>
               <TextInput
                 keyboardType="email-address"
                 autoCorrect={false}
                 style={styles.input}
-                onChangeText={setEmail}
-                value={email}
+                onChangeText={setName}
+                value={name}
               />
-              <Text style={styles.inputTopText}>Username</Text>
+              <Text style={styles.inputTopText}>Espécie</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={setUsername}
-                value={username}
+                onChangeText={setSpecies}
+                value={species}
               />
-              {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
                   buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
                 }
                 disabled={buttonDisabled}
-                onPress={submitHandler}
+                onPress={() => navigation.navigate("breed")}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>
             </View>
           </View>
         </KeyboardAvoidingView>
-        <Stepper step={1} nuSteps={3} />
+        <Stepper step={1} nuSteps={4} />
       </View>
     </TouchableWithoutFeedback>
   );

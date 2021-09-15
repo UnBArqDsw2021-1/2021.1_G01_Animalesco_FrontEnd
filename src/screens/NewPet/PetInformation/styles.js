@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
-import Constants from "expo-constants";
 import colors from "@assets/styles/colors";
+import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   page: {
@@ -13,23 +13,21 @@ const styles = StyleSheet.create({
     backgroundColor: colors.ice,
   },
   container: {
-    width: "100%",
     height: "100%",
+    width: "100%",
     display: "flex",
     justifyContent: "center",
   },
   content: {
     height: "50%",
-    width: "100%",
     display: "flex",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
   formCadastro: {
     display: "flex",
     height: "100%",
     width: "65%",
-    justifyContent: "center",
     alignItems: "center",
   },
   inputTopText: {
@@ -51,17 +49,17 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
     justifyContent: "center",
-    marginTop: 15,
     alignItems: "center",
     paddingVertical: 10,
     borderRadius: 3,
+    marginTop: 15,
     backgroundColor: colors.secondaryBlue,
   },
   nextButtoDisabled: {
     width: "100%",
+    marginTop: 15,
     display: "flex",
     justifyContent: "center",
-    marginTop: 15,
     alignItems: "center",
     paddingVertical: 10,
     borderRadius: 3,

@@ -4,25 +4,46 @@ import { useNavigation } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
-  Image,
   Text,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles.js";
-import colors from "@assets/styles/colors";
 
-import Stepper from "@components/Stepper.js";
+import { validatePassword } from "@utilites";
+import { Stepper, Alert, GoBackHeader, WaterMark } from "@components";
 
-const Password = () => {
+export const Password = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [erro, setErro] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
+
   setStatusBarStyle("dark");
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      "keyboardDidShow",
+      () => {
+        setKeyboardVisible(true); // or some other action
+      }
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      "keyboardDidHide",
+      () => {
+        setKeyboardVisible(false); // or some other action
+      }
+    );
+
+    return () => {
+      keyboardDidHideListener.remove();
+      keyboardDidShowListener.remove();
+    };
+  }, []);
 
   useEffect(() => {
     if (password && passwordConfirmation) {
@@ -32,20 +53,26 @@ const Password = () => {
     }
   }, [password, passwordConfirmation]);
 
+  const submitHandler = () => {
+    setErro("");
+    if (!validatePassword(password)) {
+      setErro("Senha deverá ter entre 5 e 25 caracteres");
+      return;
+    }
+    if (password !== passwordConfirmation) {
+      setErro(
+        "Senha de confirmação diferente. Os dois campos devem conter a mesma senha"
+      );
+      return;
+    }
+    navigation.navigate("photo");
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <View style={styles.goBackButton}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("userinformation")}
-          >
-            <AntDesign name="arrowleft" size={24} color={colors.primary} />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
+        <GoBackHeader navigate="userinformation" />
+        <View style={styles.container}>
           <KeyboardAvoidingView
             style={styles.content}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -65,30 +92,22 @@ const Password = () => {
                 value={passwordConfirmation}
                 secureTextEntry={true}
               />
+              {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
                   buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
                 }
-                onPress={() => navigation.navigate("photo")}
+                onPress={submitHandler}
                 disabled={buttonDisabled}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
-          <View style={styles.logoImageContent}>
-            <Image
-              style={styles.logoImage}
-              source={require("@assets/images/orange_mask_logo.png")}
-            />
-          </View>
+          {!isKeyboardVisible && <WaterMark orientation="left" />}
         </View>
-        <View style={styles.stepper}>
-          <Stepper step={2} />
-        </View>
+        <Stepper step={2} />
       </View>
     </TouchableWithoutFeedback>
   );
 };
-
-export default Password;

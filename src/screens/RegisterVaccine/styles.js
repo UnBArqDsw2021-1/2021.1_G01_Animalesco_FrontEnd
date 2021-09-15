@@ -3,7 +3,7 @@ import colors from "@assets/styles/colors";
 
 const styles = StyleSheet.create({
 
-register: {
+  register: {
     flex: 1,
     width: "100%",
     display: "flex",
@@ -14,49 +14,44 @@ register: {
 },
 inputRegister:{
     
-    marginBottom: 50,
-    left: 50,
+  width: "100%",
+  display: "flex",
+  justifyContent: "center",
 
 },
 textInput:{
-    paddingHorizontal: 100,
+  paddingHorizontal: 10,
     paddingVertical: 5,
-    color: colors.dark,
-    borderRadius: 5,
-    backgroundColor: colors.light,
+    borderColor: colors.gray,
     marginVertical: 10,
-    width: "100%",
+    width: "70%",
+    borderRadius: 5,
+    borderWidth: 1,
+    
 },
 inputTopText:{
+  width: "100%",
+  marginLeft: 5,
+  left: "17%",
 
 },
 salvar:{
-    width: "50%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 10,
-    borderRadius: 3,
-    backgroundColor: colors.primary,
-    marginBottom: 60,
+  width: "50%",
+  left: "20%",
+  display: "flex",
+  justifyContent: "center",
+  marginTop: 15,
+  alignItems: "center",
+  paddingVertical: 10,
+  borderRadius: 3,
+  backgroundColor: colors.gray,
 
 },
 salvarText:{
     paddingTop: 2,
     color: colors.light,
 },
-logoImage: {
-    height: 145,
-    marginTop: 60,
-    resizeMode: "contain",
-    right: 50
-  },
-  icon: {
-    top: 50,
-    right: 50,
-    alignSelf: "baseline",
-    
-  },
+
   goBackButton: {
     alignSelf: "flex-start",
     width: 50,
@@ -64,6 +59,25 @@ logoImage: {
     marginLeft: 40,
     marginTop: 40,
     marginLeft: 10,
+  },
+  nextButton:{
+    width: "50%",
+    display: "flex",
+    justifyContent: "center",
+    marginTop: 15,
+    alignItems: "center",
+    paddingVertical: 10,
+    borderRadius: 3,
+    left: "20%",
+    backgroundColor: colors.secondaryBlue,
+
+  },
+  form: {
+    display: "flex",
+    height: "80%",
+    width: "85%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 export default styles;

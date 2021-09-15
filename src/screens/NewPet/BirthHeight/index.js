@@ -5,20 +5,24 @@ import {
   KeyboardAvoidingView,
   View,
   Text,
-  Keyboard,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Platform,
+  Keyboard,
 } from "react-native";
-import { Stepper, Alert, GoBackHeader, WaterMark } from "@components";
-import { validateUsername, validateEmail } from "@utilites";
-
 import styles from "./styles.js";
 
-export const UserInformation = () => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+import { Stepper, GoBackHeader, WaterMark, Alert } from "@components";
+import {
+  validateDate,
+  formatDate,
+  validatePetBirthDay,
+  validateHeight,
+} from "@utilites";
+
+export const BirthHeight = () => {
+  const [birthDate, setBirthDate] = useState("");
+  const [petHeigth, setPetHeigth] = useState("");
   const [erro, setErro] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
@@ -47,55 +51,57 @@ export const UserInformation = () => {
   }, []);
 
   useEffect(() => {
-    if (username && email) {
+    if (birthDate && petHeigth) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [username, email]);
+  }, [birthDate, petHeigth]);
 
   const submitHandler = () => {
     setErro("");
-    if (!validateEmail(email)) {
-      setErro("Email inválido. Verifique o formato do email");
+    if (!validateDate(birthDate) || !validatePetBirthDay(birthDate)) {
+      setErro("Data inválida");
       return;
     }
-    if (!validateUsername(username)) {
-      setErro("Username deverá apenas letras e números");
+    if (!validateHeight(petHeigth)) {
+      setErro("Altura inválida");
       return;
     }
-    navigation.navigate("password");
+    navigation.navigate("petphoto");
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <GoBackHeader navigate="login" />
-        <KeyboardAvoidingView
-          style={styles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
-          {!isKeyboardVisible && <WaterMark orientation="left" />}
-          <View style={styles.content}>
+        <GoBackHeader navigate="breed" />
+        <View style={styles.container}>
+          <KeyboardAvoidingView
+            style={styles.content}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          >
             <View style={styles.formCadastro}>
-              <Text style={styles.inputTopText}>Email</Text>
+              <Text style={styles.inputTopText}>Data de nascimento</Text>
               <TextInput
-                keyboardType="email-address"
-                autoCorrect={false}
                 style={styles.input}
-                onChangeText={setEmail}
-                value={email}
+                onChangeText={(value) => {
+                  setBirthDate(formatDate(value));
+                }}
+                value={birthDate}
+                placeholder="dd/mm/aaaa"
+                keyboardType="numeric"
               />
-              <Text style={styles.inputTopText}>Username</Text>
+              <Text style={styles.inputTopText}>Altura (m)</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={setUsername}
-                value={username}
+                onChangeText={setPetHeigth}
+                value={petHeigth}
+                keyboardType="numeric"
               />
               {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
-                  buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
+                  buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
                 }
                 disabled={buttonDisabled}
                 onPress={submitHandler}
@@ -103,9 +109,10 @@ export const UserInformation = () => {
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>
             </View>
-          </View>
-        </KeyboardAvoidingView>
-        <Stepper step={1} nuSteps={3} />
+          </KeyboardAvoidingView>
+          {!isKeyboardVisible && <WaterMark orientation="left" />}
+        </View>
+        <Stepper step={3} nuSteps={4} />
       </View>
     </TouchableWithoutFeedback>
   );

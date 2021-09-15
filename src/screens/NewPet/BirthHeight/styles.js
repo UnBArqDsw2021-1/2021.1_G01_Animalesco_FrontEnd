@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: colors.secondaryBlue,
   },
-  nextButtoDisabled: {
+  nextButtonDisabled: {
     width: "100%",
     display: "flex",
     justifyContent: "center",

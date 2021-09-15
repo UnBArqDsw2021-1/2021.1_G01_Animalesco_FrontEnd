@@ -26,6 +26,9 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: "100%",
   },
+  inputTopText: {
+    color: colors.light,
+  },
   forgotPasswordtext: {
     color: colors.light,
     paddingBottom: 5,
