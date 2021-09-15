@@ -115,7 +115,7 @@ export const Password = () => {
           </KeyboardAvoidingView>
           {!isKeyboardVisible && <WaterMark orientation="left" />}
         </View>
-        <Stepper step={2} />
+        <Stepper step={2} nuSteps={3} />
       </View>
     </TouchableWithoutFeedback>
   );

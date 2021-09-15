@@ -113,7 +113,7 @@ export const Photo = () => {
             </View>
           </View>
         </KeyboardAvoidingView>
-        <Stepper step={3} />
+        <Stepper step={3} nuSteps={3} />
       </View>
     </TouchableWithoutFeedback>
   );
