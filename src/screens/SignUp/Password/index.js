@@ -80,7 +80,7 @@ export const Password = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <GoBackHeader navigate="userinformation" />
+        <GoBackHeader />
         <View style={styles.container}>
           <KeyboardAvoidingView
             style={styles.content}

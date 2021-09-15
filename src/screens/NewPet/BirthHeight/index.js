@@ -74,7 +74,7 @@ export const BirthHeight = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <GoBackHeader navigate="breed" />
+        <GoBackHeader />
         <View style={styles.container}>
           <KeyboardAvoidingView
             style={styles.content}

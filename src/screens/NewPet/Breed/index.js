@@ -44,7 +44,7 @@ export const Breed = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <GoBackHeader navigate="petinformation" />
+        <GoBackHeader />
         <View style={styles.container}>
           <KeyboardAvoidingView
             style={styles.content}

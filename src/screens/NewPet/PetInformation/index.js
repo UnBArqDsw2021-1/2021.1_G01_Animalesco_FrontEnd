@@ -55,7 +55,7 @@ export const PetInformation = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.page}>
-        <GoBackHeader navigate="home" />
+        <GoBackHeader />
         <KeyboardAvoidingView
           style={styles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}

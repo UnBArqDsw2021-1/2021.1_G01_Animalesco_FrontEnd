@@ -5,12 +5,12 @@ import { AntDesign } from "@expo/vector-icons";
 import styles from "./styles.js";
 import colors from "@assets/styles/colors";
 
-export const GoBackHeader = ({ navigate }) => {
+export const GoBackHeader = () => {
   const navigation = useNavigation();
 
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={() => navigation.navigate(navigate)}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
         <AntDesign name="arrowleft" size={24} color={colors.primary} />
       </TouchableOpacity>
     </View>

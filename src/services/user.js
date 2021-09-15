@@ -14,6 +14,11 @@ class UserService {
     const response = await api.post("/users/", data);
     return response;
   }
+
+  async getUser() {
+    const response = await api.get("/users/me/");
+    return response;
+  }
 }
 
 export const userService = new UserService();
