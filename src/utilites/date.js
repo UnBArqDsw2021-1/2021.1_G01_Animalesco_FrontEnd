@@ -15,8 +15,6 @@ export const validateDate = (value) => {
 };
 
 export const validatePetBirthDay = (value) => {
-  console.log(value);
-
   if (value.length === 10) {
     const currentDay = new Date();
     const limitDay = new Date();
@@ -25,14 +23,10 @@ export const validatePetBirthDay = (value) => {
     const [year, month, day] = splitDay(value);
     const petBirthday = new Date(year, month, day);
 
-    console.log(value);
-
     if (limitDay > petBirthday || currentDay < petBirthday) {
       return false;
     }
   }
-
-  console.log(value);
 
   return true;
 };
@@ -77,4 +71,10 @@ export const formatDate = (value) => {
   }
 
   return outString;
+};
+
+export const formatDateToRequest = (value) => {
+  const [year, month, day] = splitDay(value);
+
+  return [year, month, day].join("-");
 };

@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     backgroundColor: colors.secondaryBlue,
   },
-  nextButtoDisabled: {
+  nextButtonDisabled: {
     width: "100%",
     marginTop: 15,
     display: "flex",

@@ -45,16 +45,17 @@ const styles = StyleSheet.create({
     borderColor: colors.gray,
     marginBottom: 25,
   },
-  nextButton: {
+  submitButton: {
     width: "100%",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: 10,
+    marginTop: 10,
     borderRadius: 3,
     backgroundColor: colors.secondaryBlue,
   },
-  nextText: {
+  submitText: {
     color: colors.light,
   },
   icon: {
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 120,
     borderRadius: 100,
-    marginBottom: 40,
+    marginBottom: 25,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",

@@ -37,15 +37,19 @@ const styles = StyleSheet.create({
     marginBottom: 3,
     marginLeft: 5,
   },
-  input: {
+  pickerContent: {
     height: 41,
     width: "100%",
-    paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,
     borderWidth: 1,
     borderColor: colors.gray,
     marginBottom: 10,
+  },
+  picker: {
+    paddingHorizontal: 10,
+    height: 31,
+    width: "100%",
   },
   nextButton: {
     width: "100%",
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: colors.secondaryBlue,
   },
-  nextButtoDisabled: {
+  nextButtonDisabled: {
     width: "100%",
     display: "flex",
     justifyContent: "center",

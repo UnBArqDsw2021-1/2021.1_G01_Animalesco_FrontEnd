@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
   Image,
   Text,
   TouchableOpacity,
+  ActivityIndicator,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -15,11 +16,18 @@ import * as ImagePicker from "expo-image-picker";
 import styles from "./styles.js";
 import colors from "@assets/styles/colors";
 
-import { Stepper, GoBackHeader, WaterMark } from "@components";
+import { Stepper, GoBackHeader, WaterMark, Alert } from "@components";
+import { useService, petService } from "@services";
+import { formatDateToRequest } from "@utilites";
 
 export const PetPhoto = () => {
   const [image, setImage] = useState(null);
+  const [erro, setErro] = useState("");
+  const [newPetRequest, setNewPetRequest] = useState();
+
   const navigation = useNavigation();
+  const routes = useRoute();
+  const { name, birthDate, breeds, color, sex } = routes.params;
 
   setStatusBarStyle("dark");
 
@@ -41,11 +49,33 @@ export const PetPhoto = () => {
       allowsEditing: true,
     });
 
-    console.log(result);
-
     if (!result.cancelled) {
       setImage(result.uri);
     }
+  };
+
+  const newPetHandler = async () => {
+    setErro("");
+    setNewPetRequest(true);
+
+    data = {
+      name: name,
+      sex: sex,
+      breed: breeds,
+      birth_date: formatDateToRequest(birthDate),
+      color: color,
+    };
+
+    const response = await useService(petService, "createPet", [data]);
+
+    if (response.error) {
+      setErro("Error ao registrar um novo pet. Tente novamente mais tarde");
+      setNewPetRequest(false);
+      return;
+    }
+
+    setNewPetRequest(false);
+    navigation.navigate("home");
   };
 
   return (
@@ -71,12 +101,17 @@ export const PetPhoto = () => {
                   />
                 </View>
               )}
-              <TouchableOpacity
-                style={styles.nextButton}
-                onPress={() => navigation.navigate("")}
-              >
-                <Text style={styles.nextText}>Enviar</Text>
-              </TouchableOpacity>
+              {erro !== "" && <Alert message={erro} />}
+              {newPetRequest ? (
+                <ActivityIndicator size="large" color={colors.light} />
+              ) : (
+                <TouchableOpacity
+                  style={styles.submitButton}
+                  onPress={newPetHandler}
+                >
+                  <Text style={styles.submitText}>Registrar novo pet</Text>
+                </TouchableOpacity>
+              )}
             </View>
           </View>
         </KeyboardAvoidingView>

@@ -11,13 +11,15 @@ import {
   TouchableWithoutFeedback,
   Platform,
 } from "react-native";
-import { Stepper, GoBackHeader, WaterMark } from "@components";
+import { Stepper, GoBackHeader, WaterMark, Alert } from "@components";
+import { validateDate, formatDate, validatePetBirthDay } from "@utilites";
 
 import styles from "./styles.js";
 
 export const PetInformation = () => {
+  const [erro, setErro] = useState("");
   const [name, setName] = useState("");
-  const [species, setSpecies] = useState("");
+  const [birthDate, setBirthDate] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
   const navigation = useNavigation();
@@ -45,12 +47,21 @@ export const PetInformation = () => {
   }, []);
 
   useEffect(() => {
-    if (species && name) {
+    if (birthDate && name) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [species, name]);
+  }, [birthDate, name]);
+
+  const submitHandler = () => {
+    setErro("");
+    if (!validateDate(birthDate) || !validatePetBirthDay(birthDate)) {
+      setErro("Data inválida");
+      return;
+    }
+    navigation.navigate("speciebreed", { name, birthDate });
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -71,18 +82,23 @@ export const PetInformation = () => {
                 onChangeText={setName}
                 value={name}
               />
-              <Text style={styles.inputTopText}>Espécie</Text>
+              <Text style={styles.inputTopText}>Data de nascimento</Text>
               <TextInput
                 style={styles.input}
-                onChangeText={setSpecies}
-                value={species}
+                onChangeText={(value) => {
+                  setBirthDate(formatDate(value));
+                }}
+                value={birthDate}
+                placeholder="dd/mm/aaaa"
+                keyboardType="numeric"
               />
+              {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
-                  buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
+                  buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
                 }
                 disabled={buttonDisabled}
-                onPress={() => navigation.navigate("breed")}
+                onPress={submitHandler}
               >
                 <Text style={styles.nextText}>Próximo</Text>
               </TouchableOpacity>

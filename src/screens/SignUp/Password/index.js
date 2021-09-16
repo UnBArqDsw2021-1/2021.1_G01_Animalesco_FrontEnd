@@ -104,7 +104,7 @@ export const Password = () => {
               {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
-                  buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
+                  buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
                 }
                 onPress={submitHandler}
                 disabled={buttonDisabled}

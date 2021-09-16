@@ -17,7 +17,7 @@ class BreedService {
     return response;
   }
 
-  async getBreedBySpecieAndId({ specie_id, id }) {
+  async getBreedById({ specie_id, id }) {
     const response = await api.get(`/species/${specie_id}/breeds/${id}/`);
     return response;
   }

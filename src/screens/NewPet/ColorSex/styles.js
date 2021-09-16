@@ -47,6 +47,20 @@ const styles = StyleSheet.create({
     borderColor: colors.gray,
     marginBottom: 10,
   },
+  pickerContent: {
+    height: 41,
+    width: "100%",
+    paddingVertical: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: colors.gray,
+    marginBottom: 10,
+  },
+  picker: {
+    paddingHorizontal: 10,
+    height: 31,
+    width: "100%",
+  },
   nextButton: {
     width: "100%",
     display: "flex",

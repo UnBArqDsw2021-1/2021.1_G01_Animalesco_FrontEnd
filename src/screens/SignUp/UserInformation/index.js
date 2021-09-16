@@ -95,7 +95,7 @@ export const UserInformation = () => {
               {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
-                  buttonDisabled ? styles.nextButtoDisabled : styles.nextButton
+                  buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
                 }
                 disabled={buttonDisabled}
                 onPress={submitHandler}
