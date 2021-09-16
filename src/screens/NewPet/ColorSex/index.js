@@ -11,7 +11,7 @@ import {
   Keyboard,
 } from "react-native";
 import { Picker } from "@react-native-community/picker";
-import styles from "./styles.js";
+import defaultStyles from "@screens/styles.js";
 
 import { Stepper, GoBackHeader, WaterMark } from "@components";
 
@@ -57,26 +57,26 @@ export const ColorSex = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.page}>
+      <View style={defaultStyles.page}>
         <GoBackHeader />
-        <View style={styles.container}>
+        <View style={defaultStyles.container}>
           <KeyboardAvoidingView
-            style={styles.content}
+            style={defaultStyles.content}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
-            <View style={styles.formCadastro}>
-              <Text style={styles.inputTopText}>Cor</Text>
+            <View style={defaultStyles.formCadastro}>
+              <Text style={defaultStyles.inputTopText}>Cor</Text>
               <TextInput
                 keyboardType="email-address"
                 autoCorrect={false}
-                style={styles.input}
+                style={defaultStyles.input}
                 onChangeText={setColor}
                 value={color}
               />
-              <Text style={styles.inputTopText}>Sexo</Text>
-              <View style={styles.pickerContent}>
+              <Text style={defaultStyles.inputTopText}>Sexo</Text>
+              <View style={defaultStyles.pickerContent}>
                 <Picker
-                  style={styles.picker}
+                  style={defaultStyles.picker}
                   selectedValue={sex}
                   onValueChange={setSex}
                 >
@@ -87,7 +87,9 @@ export const ColorSex = () => {
               </View>
               <TouchableOpacity
                 style={
-                  buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
+                  buttonDisabled
+                    ? defaultStyles.buttonDisabled
+                    : defaultStyles.button
                 }
                 disabled={buttonDisabled}
                 onPress={() =>
@@ -100,7 +102,7 @@ export const ColorSex = () => {
                   })
                 }
               >
-                <Text style={styles.nextText}>Próximo</Text>
+                <Text style={defaultStyles.textButton}>Próximo</Text>
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>

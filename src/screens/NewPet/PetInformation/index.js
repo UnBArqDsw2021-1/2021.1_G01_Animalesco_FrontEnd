@@ -14,6 +14,7 @@ import {
 import { Stepper, GoBackHeader, WaterMark, Alert } from "@components";
 import { validateDate, formatDate, validatePetBirthDay } from "@utilites";
 
+import defaultStyles from "@screens/styles.js";
 import styles from "./styles.js";
 
 export const PetInformation = () => {
@@ -65,26 +66,26 @@ export const PetInformation = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.page}>
+      <View style={defaultStyles.page}>
         <GoBackHeader />
         <KeyboardAvoidingView
-          style={styles.container}
+          style={defaultStyles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           {!isKeyboardVisible && <WaterMark orientation="left" />}
-          <View style={styles.content}>
+          <View style={defaultStyles.content}>
             <View style={styles.formCadastro}>
-              <Text style={styles.inputTopText}>Nome</Text>
+              <Text style={defaultStyles.inputTopText}>Nome</Text>
               <TextInput
                 keyboardType="email-address"
                 autoCorrect={false}
-                style={styles.input}
+                style={defaultStyles.input}
                 onChangeText={setName}
                 value={name}
               />
-              <Text style={styles.inputTopText}>Data de nascimento</Text>
+              <Text style={defaultStyles.inputTopText}>Data de nascimento</Text>
               <TextInput
-                style={styles.input}
+                style={defaultStyles.input}
                 onChangeText={(value) => {
                   setBirthDate(formatDate(value));
                 }}
@@ -95,12 +96,14 @@ export const PetInformation = () => {
               {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
-                  buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
+                  buttonDisabled
+                    ? defaultStyles.buttonDisabled
+                    : defaultStyles.button
                 }
                 disabled={buttonDisabled}
                 onPress={submitHandler}
               >
-                <Text style={styles.nextText}>Próximo</Text>
+                <Text style={defaultStyles.textButton}>Próximo</Text>
               </TouchableOpacity>
             </View>
           </View>

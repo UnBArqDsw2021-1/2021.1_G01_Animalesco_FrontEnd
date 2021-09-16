@@ -13,7 +13,9 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+
 import styles from "./styles.js";
+import defaultStyles from "@screens/styles.js";
 import colors from "@assets/styles/colors";
 
 import { Stepper, GoBackHeader, WaterMark, Alert } from "@components";
@@ -80,7 +82,7 @@ export const PetPhoto = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.page}>
+      <View style={defaultStyles.page}>
         <GoBackHeader />
         <KeyboardAvoidingView
           style={styles.container}
@@ -88,11 +90,14 @@ export const PetPhoto = () => {
         >
           <WaterMark orientation="right" />
           <View style={styles.content}>
-            <View style={styles.formCadastro}>
+            <View style={defaultStyles.formCadastro}>
               {image ? (
-                <Image source={{ uri: image }} style={styles.imageProfile} />
+                <Image
+                  source={{ uri: image }}
+                  style={defaultStyles.imageProfile}
+                />
               ) : (
-                <View style={styles.iconPhoto}>
+                <View style={defaultStyles.iconPhoto}>
                   <MaterialIcons
                     name="photo-camera"
                     size={42}
@@ -106,10 +111,12 @@ export const PetPhoto = () => {
                 <ActivityIndicator size="large" color={colors.light} />
               ) : (
                 <TouchableOpacity
-                  style={styles.submitButton}
+                  style={defaultStyles.button}
                   onPress={newPetHandler}
                 >
-                  <Text style={styles.submitText}>Registrar novo pet</Text>
+                  <Text style={defaultStyles.textButton}>
+                    Registrar novo pet
+                  </Text>
                 </TouchableOpacity>
               )}
             </View>

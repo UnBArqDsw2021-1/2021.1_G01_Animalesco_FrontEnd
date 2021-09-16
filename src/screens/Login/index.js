@@ -12,9 +12,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "./styles.js";
-import colors from "@assets/styles/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import styles from "./styles.js";
+import defaultStyles from "@screens/styles.js";
+import colors from "@assets/styles/colors";
 
 import { validateUsername, validatePassword } from "@utilites";
 import { Alert } from "@components";
@@ -80,13 +82,12 @@ export const Login = () => {
   const renderLoginButton = () => (
     <TouchableOpacity
       style={
-        buttonDisabled ? styles.contentButtonDisabled : styles.contentButton
+        buttonDisabled ? defaultStyles.buttonDisabled : defaultStyles.button
       }
       disabled={buttonDisabled || loadingLoginRequest}
       onPress={loginHandler}
-      // onPress={() => navigation.navigate("home")}
     >
-      <Text style={styles.button}>ENTRAR</Text>
+      <Text style={defaultStyles.textButton}>ENTRAR</Text>
     </TouchableOpacity>
   );
 

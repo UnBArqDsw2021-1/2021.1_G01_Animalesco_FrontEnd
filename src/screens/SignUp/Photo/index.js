@@ -13,7 +13,9 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+
 import styles from "./styles.js";
+import defaultStyles from "@screens/styles.js";
 import colors from "@assets/styles/colors";
 
 import { Stepper, GoBackHeader, WaterMark, Alert } from "@components";
@@ -78,7 +80,7 @@ export const Photo = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.page}>
+      <View style={defaultStyles.page}>
         <GoBackHeader />
         <KeyboardAvoidingView
           style={styles.container}
@@ -86,11 +88,14 @@ export const Photo = () => {
         >
           <WaterMark orientation="right" />
           <View style={styles.content}>
-            <View style={styles.formCadastro}>
+            <View style={defaultStyles.formCadastro}>
               {image ? (
-                <Image source={{ uri: image }} style={styles.imageProfile} />
+                <Image
+                  source={{ uri: image }}
+                  style={defaultStyles.imageProfile}
+                />
               ) : (
-                <View style={styles.iconPhoto}>
+                <View style={defaultStyles.iconPhoto}>
                   <MaterialIcons
                     name="photo-camera"
                     size={42}
@@ -104,10 +109,12 @@ export const Photo = () => {
                 <ActivityIndicator size="large" color={colors.light} />
               ) : (
                 <TouchableOpacity
-                  style={styles.submitButton}
+                  style={defaultStyles.button}
                   onPress={signUpHandler}
                 >
-                  <Text style={styles.submitText}>Finalizar Cadastro</Text>
+                  <Text style={defaultStyles.textButton}>
+                    Finalizar Cadastro
+                  </Text>
                 </TouchableOpacity>
               )}
             </View>

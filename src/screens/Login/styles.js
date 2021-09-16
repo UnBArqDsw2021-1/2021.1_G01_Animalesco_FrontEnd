@@ -23,10 +23,11 @@ const styles = StyleSheet.create({
     color: colors.dark,
     borderRadius: 5,
     backgroundColor: colors.light,
-    marginVertical: 10,
+    marginBottom: 10,
     width: "100%",
   },
   inputTopText: {
+    marginBottom: 3,
     color: colors.light,
   },
   forgotPasswordtext: {
@@ -47,25 +48,6 @@ const styles = StyleSheet.create({
     height: 160,
     marginTop: 60,
     resizeMode: "contain",
-  },
-  contentButton: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 10,
-    borderRadius: 3,
-    backgroundColor: colors.secondaryBlue,
-  },
-  contentButtonDisabled: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: 10,
-    borderRadius: 3,
-    backgroundColor: colors.gray,
-  },
-  button: {
-    color: colors.light,
   },
 });
 

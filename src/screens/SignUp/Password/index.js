@@ -6,12 +6,11 @@ import {
   View,
   Text,
   TextInput,
-  ActivityIndicator,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import styles from "./styles.js";
+import defaultStyles from "@screens/styles.js";
 
 import { validatePassword } from "@utilites";
 import { Stepper, Alert, GoBackHeader, WaterMark } from "@components";
@@ -60,7 +59,7 @@ export const Password = () => {
   const submitHandler = () => {
     setErro("");
     if (!validatePassword(password)) {
-      setErro("Senha deverá ter entre 5 e 25 caracteres");
+      setErro("Senha deverá ter entre 8 e 25 caracteres");
       return;
     }
     if (password !== passwordConfirmation) {
@@ -79,24 +78,26 @@ export const Password = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.page}>
+      <View style={defaultStyles.page}>
         <GoBackHeader />
-        <View style={styles.container}>
+        <View style={defaultStyles.container}>
           <KeyboardAvoidingView
-            style={styles.content}
+            style={defaultStyles.content}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
-            <View style={styles.formCadastro}>
-              <Text style={styles.inputTopText}>Senha</Text>
+            <View style={defaultStyles.formCadastro}>
+              <Text style={defaultStyles.inputTopText}>Senha</Text>
               <TextInput
-                style={styles.input}
+                style={defaultStyles.input}
                 onChangeText={setPassword}
                 value={password}
                 secureTextEntry={true}
               />
-              <Text style={styles.inputTopText}>Confirmação da senha</Text>
+              <Text style={defaultStyles.inputTopText}>
+                Confirmação da senha
+              </Text>
               <TextInput
-                style={styles.input}
+                style={defaultStyles.input}
                 onChangeText={setPasswordConfirmation}
                 value={passwordConfirmation}
                 secureTextEntry={true}
@@ -104,12 +105,14 @@ export const Password = () => {
               {erro !== "" && <Alert message={erro} />}
               <TouchableOpacity
                 style={
-                  buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
+                  buttonDisabled
+                    ? defaultStyles.buttonDisabled
+                    : defaultStyles.button
                 }
                 onPress={submitHandler}
                 disabled={buttonDisabled}
               >
-                <Text style={styles.nextText}>Próximo</Text>
+                <Text style={defaultStyles.textButton}>Próximo</Text>
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>

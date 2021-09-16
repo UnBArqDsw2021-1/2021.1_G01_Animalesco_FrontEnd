@@ -10,7 +10,7 @@ import {
   Keyboard,
 } from "react-native";
 import { Picker } from "@react-native-community/picker";
-import styles from "./styles.js";
+import defaultStyles from "@screens/styles.js";
 
 import { Stepper, GoBackHeader, WaterMark } from "@components";
 import { useService, specieService, breedService } from "@services";
@@ -86,18 +86,18 @@ export const SpecieBreed = () => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.page}>
+      <View style={defaultStyles.page}>
         <GoBackHeader />
-        <View style={styles.container}>
+        <View style={defaultStyles.container}>
           <KeyboardAvoidingView
-            style={styles.content}
+            style={defaultStyles.content}
             behavior={Platform.OS === "ios" ? "padding" : "height"}
           >
-            <View style={styles.formCadastro}>
-              <Text style={styles.inputTopText}>Espécie</Text>
-              <View style={styles.pickerContent}>
+            <View style={defaultStyles.formCadastro}>
+              <Text style={defaultStyles.inputTopText}>Espécie</Text>
+              <View style={defaultStyles.pickerContent}>
                 <Picker
-                  style={styles.picker}
+                  style={defaultStyles.picker}
                   selectedValue={species}
                   onValueChange={setSpecies}
                 >
@@ -110,10 +110,10 @@ export const SpecieBreed = () => {
                   ))}
                 </Picker>
               </View>
-              <Text style={styles.inputTopText}>Raça</Text>
-              <View style={styles.pickerContent}>
+              <Text style={defaultStyles.inputTopText}>Raça</Text>
+              <View style={defaultStyles.pickerContent}>
                 <Picker
-                  style={styles.picker}
+                  style={defaultStyles.picker}
                   selectedValue={breeds}
                   onValueChange={setBreeds}
                   enabled={species !== -1 ? true : false}
@@ -125,7 +125,9 @@ export const SpecieBreed = () => {
               </View>
               <TouchableOpacity
                 style={
-                  buttonDisabled ? styles.nextButtonDisabled : styles.nextButton
+                  buttonDisabled
+                    ? defaultStyles.buttonDisabled
+                    : defaultStyles.button
                 }
                 onPress={() =>
                   navigation.navigate("colorsex", {
@@ -136,7 +138,7 @@ export const SpecieBreed = () => {
                 }
                 disabled={buttonDisabled}
               >
-                <Text style={styles.nextText}>Próximo</Text>
+                <Text style={defaultStyles.textButton}>Próximo</Text>
               </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
