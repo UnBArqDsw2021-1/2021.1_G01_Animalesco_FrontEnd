@@ -31,7 +31,7 @@ const Routes = () => {
       <Stack.Screen name="speciebreed" component={SpecieBreed} />
       <Stack.Screen name="colorsex" component={ColorSex} />
       <Stack.Screen name="petphoto" component={PetPhoto} />
-      <Stack.Screen name="registerVaccine" component={RegisterVaccine} />
+      <Stack.Screen name="registervaccine" component={RegisterVaccine} />
     </Stack.Navigator>
   );
 };

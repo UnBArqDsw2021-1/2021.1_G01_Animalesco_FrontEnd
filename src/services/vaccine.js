@@ -7,8 +7,8 @@ class VaccineService {
     pet_id,
     name,
     application_date,
-    next_application_date,
-    is_finished,
+    next_application_date = "",
+    is_finished = false,
   }) {
     const data = {
       name: name,

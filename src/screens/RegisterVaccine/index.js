@@ -6,102 +6,125 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  KeyboardAvoidingView,
+  Keyboard,
+  ActivityIndicator,
 } from "react-native";
-import {
-  validateDate,
-  formatDate,
-  validatePetBirthDay,
-  validateHeight,
-} from "@utilites";
-import { GoBackHeader, Alert } from "@components";
-import styles from "./styles.js";
+
 import colors from "@assets/styles/colors";
+import defaultStyles from "@screens/styles.js";
 
+import { validateDate, formatDate, formatDateToRequest } from "@utilites";
+import { GoBackHeader, Alert } from "@components";
+import { useService, vaccineService } from "@services";
 
-export const RegisterVaccine = () =>{
-    const [nameVacina, setNomeVacina] = useState("");
-    const [dataDose, setDataDose] = useState("");
-    const [dataRepetirDose, setDataRepetirDose] = useState("");
-    const [buttonDisabled, setButtonDisabled] = useState(true);
-    const [erro, setErro] = useState("");
+export const RegisterVaccine = () => {
+  const [nameVaccine, setNameVaccine] = useState("");
+  const [doseData, setDoseData] = useState("");
+  const [vaccineRequest, setVaccineRequest] = useState(false);
+  const [doseRepeatData, setDoseRepeatData] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [erro, setErro] = useState("");
 
-    const navigation = useNavigation();
+  const navigation = useNavigation();
   setStatusBarStyle("dark");
 
   useEffect(() => {
-    if (dataDose && dataRepetirDose) {
+    if (doseData && nameVaccine) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [dataDose, dataRepetirDose]);
+  }, [doseData, nameVaccine]);
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     setErro("");
-    if (!validateDate(dataDose) || !validatePetBirthDay(dataDose)) {
+    setVaccineRequest(true);
+    if (!validateDate(doseData)) {
       setErro("Data inválida");
       return;
     }
-    if (!validateDate(dataRepetirDose) || !validatePetBirthDay(dataRepetirDose)) {
+    if (doseRepeatData && !validateDate(doseRepeatData)) {
       setErro("Data inválida");
       return;
     }
+
+    const data = {
+      pet_id: 7,
+      name: nameVaccine,
+      application_date: formatDateToRequest(doseData),
+      next_application_date: formatDateToRequest(doseRepeatData),
+    };
+
+    const response = await useService(vaccineService, "createVaccine", [data]);
+
+    if (response.error) {
+      setErro("Error ao registrar vacina. Tente novamente");
+      setVaccineRequest(false);
+      return;
+    }
+
+    setVaccineRequest(false);
+    navigation.navigate("home");
   };
-    
 
-return (
-
-    <View style= {styles.register}> 
-
-        <View style={styles.inputRegister}>
-        <View >
-        <GoBackHeader navigate="home"/>
-          </View>
-          <View style={styles.form}>
-      
-            <Text style={styles.inputTopText}>Nome da vacina</Text>
-            <TextInput
-                style={styles.textInput}
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View style={defaultStyles.page}>
+        <GoBackHeader />
+        <KeyboardAvoidingView
+          style={defaultStyles.container}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <View style={defaultStyles.content}>
+            <View style={defaultStyles.formCadastro}>
+              <Text style={defaultStyles.inputTopText}>Nome da vacina</Text>
+              <TextInput
+                style={defaultStyles.input}
                 autoCorrect={false}
                 placeholderTextColor={colors.gray}
-                onChangeText={(nameVacina) => setNomeVacina(nameVacina)}
-                value={nameVacina}
-            />
-        <Text style={styles.inputTopText}>Data da dose</Text>
-            <TextInput
-                style={styles.textInput}
-                onChangeText={(value) => {
-                  setDataDose(formatDate(value));
-                }}
-                value={dataDose}
+                onChangeText={setNameVaccine}
+                value={nameVaccine}
+              />
+              <Text style={defaultStyles.inputTopText}>Data da dose</Text>
+              <TextInput
+                style={defaultStyles.input}
+                onChangeText={(res) => setDoseData(formatDate(res))}
+                value={doseData}
                 placeholder="dd/mm/aaaa"
                 keyboardType="numeric"
               />
-        <Text style={styles.inputTopText}>Data da próxima dose</Text>
-            <TextInput
-                style={styles.textInput}
-                onChangeText={(value) => {
-                  setDataRepetirDose(formatDate(value));
-                }}
-                value={dataRepetirDose}
+              <Text style={defaultStyles.inputTopText}>
+                Data da próxima dose
+              </Text>
+              <TextInput
+                style={defaultStyles.input}
+                onChangeText={(res) => setDoseRepeatData(formatDate(res))}
+                value={doseRepeatData}
                 placeholder="dd/mm/aaaa"
                 keyboardType="numeric"
               />
-        </View>
-        
-        {erro !== "" && <Alert message={erro} />}
-        <TouchableOpacity
-                style={
-                  buttonDisabled ? styles.salvar : styles.nextButton
-                }
-                disabled={buttonDisabled}
-                onPress={submitHandler}
-              >
-                <Text style={styles.salvarText}>Salvar</Text>
-              </TouchableOpacity>
-              
+              {erro !== "" && <Alert message={erro} />}
+              {vaccineRequest ? (
+                <ActivityIndicator size="large" color={colors.light} />
+              ) : (
+                <TouchableOpacity
+                  style={
+                    buttonDisabled
+                      ? defaultStyles.buttonDisabled
+                      : defaultStyles.button
+                  }
+                  disabled={buttonDisabled}
+                  onPress={submitHandler}
+                >
+                  <Text style={defaultStyles.textButton}>Salvar</Text>
+                </TouchableOpacity>
+              )}
             </View>
-            </View>
-);
+          </View>
+        </KeyboardAvoidingView>
+      </View>
+    </TouchableWithoutFeedback>
+  );
 };
-

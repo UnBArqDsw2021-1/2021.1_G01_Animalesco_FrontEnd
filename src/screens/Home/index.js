@@ -16,7 +16,7 @@ export const Home = () => {
       <View>
         <TouchableOpacity
           style={styles.newPet}
-          onPress={() => navigation.navigate("registerVaccine")}
+          onPress={() => navigation.navigate("registervaccine")}
         >
           <Text>Cadastrar novo pet</Text>
         </TouchableOpacity>
