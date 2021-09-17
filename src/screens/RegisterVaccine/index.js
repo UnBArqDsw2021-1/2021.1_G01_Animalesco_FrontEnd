@@ -15,7 +15,12 @@ import {
 import colors from "@assets/styles/colors";
 import defaultStyles from "@screens/styles.js";
 
-import { validateDate, formatDate, formatDateToRequest } from "@utilites";
+import {
+  validateDate,
+  formatDate,
+  formatDateToRequest,
+  validateDateAfterOther,
+} from "@utilites";
 import { GoBackHeader, Alert } from "@components";
 import { useService, vaccineService } from "@services";
 
@@ -41,12 +46,20 @@ export const RegisterVaccine = () => {
   const submitHandler = async () => {
     setErro("");
     setVaccineRequest(true);
+
     if (!validateDate(doseData)) {
       setErro("Data inválida");
+      setVaccineRequest(false);
       return;
     }
     if (doseRepeatData && !validateDate(doseRepeatData)) {
       setErro("Data inválida");
+      setVaccineRequest(false);
+      return;
+    }
+    if (!validateDateAfterOther(doseData, doseRepeatData)) {
+      setErro("A data da segunda dose deve ser após a primeira dose");
+      setVaccineRequest(false);
       return;
     }
 

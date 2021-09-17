@@ -31,6 +31,20 @@ export const validatePetBirthDay = (value) => {
   return true;
 };
 
+export const validateDateAfterOther = (before, after) => {
+  const [yearBefore, monthBefore, dayBefore] = splitDay(before);
+  const [yearAfter, monthAfter, dayAfter] = splitDay(after);
+
+  const dateBefore = new Date(yearBefore, monthBefore, dayBefore);
+  const dateAfter = new Date(yearAfter, monthAfter, dayAfter);
+
+  if (dateBefore > dateAfter) {
+    return false;
+  }
+
+  return true;
+};
+
 export const formatDate = (value) => {
   const src = (value || "").replace(/[^\d/]/g, "");
   const srcLength = src.length;

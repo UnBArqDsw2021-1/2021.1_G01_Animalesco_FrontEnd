@@ -6,5 +6,6 @@ export {
   validatePetBirthDay,
   formatDate,
   formatDateToRequest,
+  validateDateAfterOther,
 } from "./date.js";
 export { validateHeight } from "./height.js";
