@@ -7,9 +7,10 @@
       {
         "root": ["."],
         "alias": {
-          "@components": "./src/components/index",
-          "@screens": "./src/screens/index",
-          "@utilites": "./src/utilites/index",
+          "@components": "./src/components",
+          "@screens": "./src/screens",
+          "@utilites": "./src/utilites",
+          "@services": "./src/services",
           "@assets": "./assets"
         }
       }

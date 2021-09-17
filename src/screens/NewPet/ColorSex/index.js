@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   KeyboardAvoidingView,
   View,
   Text,
-  Keyboard,
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Platform,
+  Keyboard,
 } from "react-native";
-import { Stepper, Alert, GoBackHeader, WaterMark } from "@components";
-import { validateUsername, validateEmail } from "@utilites";
-
+import { Picker } from "@react-native-community/picker";
 import defaultStyles from "@screens/styles.js";
-import styles from "./styles.js";
 
-export const UserInformation = () => {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [erro, setErro] = useState("");
+import { Stepper, GoBackHeader, WaterMark } from "@components";
+
+export const ColorSex = () => {
+  const [color, setColor] = useState("");
+  const [sex, setSex] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
   const navigation = useNavigation();
+  const routes = useRoute();
+  const { name, birthDate, breeds } = routes.params;
 
   setStatusBarStyle("dark");
 
@@ -48,52 +48,43 @@ export const UserInformation = () => {
   }, []);
 
   useEffect(() => {
-    if (username && email) {
+    if (sex && color) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [username, email]);
-
-  const submitHandler = () => {
-    setErro("");
-    if (!validateEmail(email)) {
-      setErro("Email inválido. Verifique o formato do email");
-      return;
-    }
-    if (!validateUsername(username)) {
-      setErro("Username deverá apenas letras e números");
-      return;
-    }
-    navigation.navigate("password", { email, username });
-  };
+  }, [sex, color]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={defaultStyles.page}>
         <GoBackHeader />
-        <KeyboardAvoidingView
-          style={defaultStyles.container}
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-        >
-          {!isKeyboardVisible && <WaterMark orientation="left" />}
-          <View style={defaultStyles.content}>
-            <View style={styles.formCadastro}>
-              <Text style={defaultStyles.inputTopText}>Email</Text>
+        <View style={defaultStyles.container}>
+          <KeyboardAvoidingView
+            style={defaultStyles.content}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+          >
+            <View style={defaultStyles.formCadastro}>
+              <Text style={defaultStyles.inputTopText}>Cor</Text>
               <TextInput
                 keyboardType="email-address"
                 autoCorrect={false}
                 style={defaultStyles.input}
-                onChangeText={setEmail}
-                value={email}
+                onChangeText={setColor}
+                value={color}
               />
-              <Text style={defaultStyles.inputTopText}>Username</Text>
-              <TextInput
-                style={defaultStyles.input}
-                onChangeText={setUsername}
-                value={username}
-              />
-              {erro !== "" && <Alert message={erro} />}
+              <Text style={defaultStyles.inputTopText}>Sexo</Text>
+              <View style={defaultStyles.pickerContent}>
+                <Picker
+                  style={defaultStyles.picker}
+                  selectedValue={sex}
+                  onValueChange={setSex}
+                >
+                  <Picker.Item label={"--"} value={""} />
+                  <Picker.Item label={"Macho"} value={"M"} />
+                  <Picker.Item label={"Fêmea"} value={"F"} />
+                </Picker>
+              </View>
               <TouchableOpacity
                 style={
                   buttonDisabled
@@ -101,14 +92,23 @@ export const UserInformation = () => {
                     : defaultStyles.button
                 }
                 disabled={buttonDisabled}
-                onPress={submitHandler}
+                onPress={() =>
+                  navigation.navigate("petphoto", {
+                    name,
+                    birthDate,
+                    breeds,
+                    color,
+                    sex,
+                  })
+                }
               >
                 <Text style={defaultStyles.textButton}>Próximo</Text>
               </TouchableOpacity>
             </View>
-          </View>
-        </KeyboardAvoidingView>
-        <Stepper step={1} nuSteps={3} />
+          </KeyboardAvoidingView>
+          {!isKeyboardVisible && <WaterMark orientation="left" />}
+        </View>
+        <Stepper step={3} nuSteps={4} />
       </View>
     </TouchableWithoutFeedback>
   );

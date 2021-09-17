@@ -2,7 +2,8 @@ import { StyleSheet } from "react-native";
 import Constants from "expo-constants";
 import colors from "@assets/styles/colors";
 
-const styles = StyleSheet.create({
+const defaultStyles = StyleSheet.create({
+  //box
   page: {
     flex: 1,
     width: "100%",
@@ -32,6 +33,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
+  //input
   inputTopText: {
     width: "100%",
     marginBottom: 3,
@@ -47,7 +50,25 @@ const styles = StyleSheet.create({
     borderColor: colors.gray,
     marginBottom: 10,
   },
-  nextButton: {
+
+  //picker
+  pickerContent: {
+    height: 41,
+    width: "100%",
+    paddingVertical: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: colors.gray,
+    marginBottom: 10,
+  },
+  picker: {
+    paddingHorizontal: 10,
+    height: 31,
+    width: "100%",
+  },
+
+  //button
+  button: {
     width: "100%",
     display: "flex",
     justifyContent: "center",
@@ -57,7 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: colors.secondaryBlue,
   },
-  nextButtoDisabled: {
+  buttonDisabled: {
     width: "100%",
     display: "flex",
     justifyContent: "center",
@@ -67,9 +88,32 @@ const styles = StyleSheet.create({
     borderRadius: 3,
     backgroundColor: colors.gray,
   },
-  nextText: {
+  textButton: {
     color: colors.light,
+  },
+
+  //photo
+  icon: {
+    alignSelf: "baseline",
+  },
+  imageProfile: {
+    width: 130,
+    height: 130,
+    left: 5,
+    top: -50,
+    borderRadius: 100,
+    alignSelf: "center",
+  },
+  iconPhoto: {
+    backgroundColor: colors.grayLight,
+    width: 120,
+    height: 120,
+    borderRadius: 100,
+    marginBottom: 25,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
-export default styles;
+export default defaultStyles;

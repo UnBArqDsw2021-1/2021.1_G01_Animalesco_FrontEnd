@@ -12,10 +12,15 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import styles from "./styles.js";
+import defaultStyles from "@screens/styles.js";
 import colors from "@assets/styles/colors";
+
 import { validateUsername, validatePassword } from "@utilites";
 import { Alert } from "@components";
+import { loginService, useService } from "@services";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -34,22 +39,41 @@ export const Login = () => {
     }
   }, [username, password, buttonDisabled]);
 
-  // const loginHandler = async () => {
-  //   setErro("");
-  //   if (!validateUsername(username) || !validatePassword(password)) {
-  //     setErro("Senha ou Username incorretos");
-  //     return;
-  //   }
+  const loginHandler = async () => {
+    setErro("");
+    if (!validateUsername(username) || !validatePassword(password)) {
+      setErro("Senha ou username incorretos");
+      return;
+    }
 
-  //   setLoadingLoginRequest(true);
-  //   const data = { username, password };
-  //   Keyboard.dismiss;
-  //   setLoadingLoginRequest(true);
-  //   // aqui entrará o post para a api
+    setLoadingLoginRequest(true);
+    const data = { username, password };
+    Keyboard.dismiss;
+    setLoadingLoginRequest(true);
+    // aqui entrará o post para a api
 
-  //   // await useService(SessionService, "signIn", [data]);
-  //   setLoadingLoginRequest(false);
-  // };
+    const response = await useService(loginService, "getToken", [data]);
+
+    if (response.error) {
+      setErro("Senha ou username incorretos");
+      setLoadingLoginRequest(false);
+      return;
+    } else {
+      try {
+        await AsyncStorage.setItem(
+          "@animalesco:auth_token",
+          response.data.auth_token
+        );
+      } catch (e) {
+        setErro("Erro ao efetuar o login, tente novamente");
+        setLoadingLoginRequest(false);
+        return;
+      }
+    }
+
+    setLoadingLoginRequest(false);
+    navigation.navigate("home");
+  };
 
   const renderLoadingIndicator = () => (
     <ActivityIndicator size="large" color={colors.light} />
@@ -58,19 +82,14 @@ export const Login = () => {
   const renderLoginButton = () => (
     <TouchableOpacity
       style={
-        buttonDisabled ? styles.contentButtonDisabled : styles.contentButton
+        buttonDisabled ? defaultStyles.buttonDisabled : defaultStyles.button
       }
       disabled={buttonDisabled || loadingLoginRequest}
-      // onPress={loginHandler}
-      onPress={() => navigation.navigate("home")}
+      onPress={loginHandler}
     >
-      <Text style={styles.button}>ENTRAR</Text>
+      <Text style={defaultStyles.textButton}>ENTRAR</Text>
     </TouchableOpacity>
   );
-
-  const handleSignUp = () => {
-    navigation.navigate("userinformation");
-  };
 
   return (
     <LinearGradient
@@ -115,7 +134,10 @@ export const Login = () => {
                 ? renderLoadingIndicator()
                 : renderLoginButton()}
             </View>
-            <TouchableOpacity style={styles.signUP} onPress={handleSignUp}>
+            <TouchableOpacity
+              style={styles.signUP}
+              onPress={() => navigation.navigate("userinformation")}
+            >
               <Text style={styles.signupText}>Criar Conta</Text>
             </TouchableOpacity>
           </View>
