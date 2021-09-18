@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.ice,
+    backgroundColor: colors.light,
     height: 55,
     width: "100%",
     bottom: 0,

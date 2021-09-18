@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { setStatusBarStyle } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import {
   View,
@@ -8,18 +9,25 @@ import {
 } from "react-native";
 import styles from "./styles";
 
+import { ModalRegister } from "./components/ModalRegister";
+import defaultStyles from "@screens/styles.js";
+
 export const Home = () => {
-  const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+  setStatusBarStyle("dark");
 
   return (
-    <TouchableWithoutFeedback>
-      <View>
-        <TouchableOpacity
-          style={styles.newPet}
-          onPress={() => navigation.navigate("registervaccine")}
-        >
-          <Text>Cadastrar novo pet</Text>
-        </TouchableOpacity>
+    <TouchableWithoutFeedback style={defaultStyles.page}>
+      <View style={defaultStyles.container}>
+        <View style={defaultStyles.container}>
+          <TouchableOpacity
+            style={styles.newPet}
+            onPress={() => setModalVisible(true)}
+          >
+            <Text>Abrir modal</Text>
+          </TouchableOpacity>
+          <ModalRegister visible={modalVisible} setVisible={setModalVisible} />
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );

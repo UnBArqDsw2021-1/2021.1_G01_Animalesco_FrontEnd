@@ -17,7 +17,7 @@ const Stack = createStackNavigator();
 const Routes = () => {
   return (
     <Stack.Navigator
-      initialRouteName="registervaccine"
+      initialRouteName="login"
       screenOptions={{
         headerShown: false,
       }}
