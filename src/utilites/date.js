@@ -96,7 +96,14 @@ export const formatDate = (value) => {
 };
 
 export const formatDateToRequest = (value) => {
-  const [year, month, day] = splitDay(value);
+  const [yyyy, mm, dd] = splitDay(value);
 
-  return [year, month, day].join("-");
+  const month = parseInt(mm) + 1;
+  const day = parseInt(dd);
+
+  return [
+    yyyy,
+    month.toString().padStart(2, "0"),
+    day.toString().padStart(2, "0"),
+  ].join("-");
 };
