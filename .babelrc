@@ -11,6 +11,7 @@
           "@screens": "./src/screens",
           "@utilites": "./src/utilites",
           "@services": "./src/services",
+          "@store": "./src/store",
           "@assets": "./assets"
         }
       }

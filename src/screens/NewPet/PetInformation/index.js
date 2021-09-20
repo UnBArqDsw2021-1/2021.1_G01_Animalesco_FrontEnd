@@ -77,8 +77,6 @@ export const PetInformation = () => {
             <View style={styles.formCadastro}>
               <Text style={defaultStyles.inputTopText}>Nome</Text>
               <TextInput
-                keyboardType="email-address"
-                autoCorrect={false}
                 style={defaultStyles.input}
                 onChangeText={setName}
                 value={name}

@@ -1,16 +1,24 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import Routes from "./src/routes.js";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
+
+import Routes from "./src/routes.js";
 import colors from "@assets/styles/colors.js";
+import { UserProvider, PetsProvider } from "@store";
 
 export default function App() {
   return (
-    <NavigationContainer style={styles.container}>
-      <StatusBar style="dark" />
-      <Routes />
-    </NavigationContainer>
+    <>
+      <StatusBar style="dark"></StatusBar>
+      <PetsProvider>
+        <UserProvider>
+          <NavigationContainer style={styles.container}>
+            <Routes />
+          </NavigationContainer>
+        </UserProvider>
+      </PetsProvider>
+    </>
   );
 }
 

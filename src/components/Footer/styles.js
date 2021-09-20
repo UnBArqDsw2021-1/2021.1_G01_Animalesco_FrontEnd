@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.ice,
+    backgroundColor: colors.primary,
     height: 55,
     width: "100%",
     bottom: 0,
@@ -15,9 +15,18 @@ const styles = StyleSheet.create({
   content: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
     alignItems: "center",
-    width: 120,
+    width: "100%",
+  },
+  itens: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  itensText: {
+    color: colors.light,
+    fontSize: 12,
   },
 });
 

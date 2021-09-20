@@ -7,6 +7,14 @@ const splitDay = (value) => {
   return [year, month, day];
 };
 
+export const formatToBrPattern = (value) => {
+  const [year, month, day] = value.split("-");
+
+  const dateStr = [day, month, year].join("/");
+
+  return dateStr;
+};
+
 export const validateDate = (value) => {
   if (value.length !== 10) {
     return false;

@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: Constants.statusBarHeight + 55,
     paddingLeft: 20,
-    backgroundColor: colors.light,
+    backgroundColor: colors.ice,
     paddingTop: Constants.statusBarHeight,
     top: 0,
     zIndex: 20,

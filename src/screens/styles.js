@@ -11,7 +11,7 @@ const defaultStyles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: colors.light,
+    backgroundColor: colors.ice,
   },
   container: {
     width: "100%",
