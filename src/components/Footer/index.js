@@ -2,10 +2,13 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import colors from "@assets/styles/colors";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles.js";
 
 export const Footer = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
