@@ -8,11 +8,10 @@ const api = axios.create({
 api.interceptors.request.use(
   async (config) => {
     let accessToken = await AsyncStorage.getItem("@animalesco:auth_token");
-
     if (accessToken) {
       config.headers.Authorization = `token ${accessToken}`;
-      return config;
     }
+    return config;
   },
   (error) => {
     console.log(error);
