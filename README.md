@@ -1,5 +1,5 @@
 <p align='center'>
-    <img src='https://raw.githubusercontent.com/UnBArqDsw2021-1/2021.1_G01_Animalesco_FrontEnd/main/assets/logo.png'>
+    <img src='https://raw.githubusercontent.com/UnBArqDsw2021-1/2021.1_G01_Animalesco_FrontEnd/main/assets/images/logo.png'>
 </p>
 
 # Animalesco - Front_End
@@ -54,7 +54,7 @@ Após clonar o projeto, entre dentro da pasta do repositório e execute:
 Uma aba será aberta em seu navegador.
 
 <p align='center'>
-    <img src='https://raw.githubusercontent.com/UnBArqDsw2021-1/2021.1_G01_Animalesco_FrontEnd/main/assets/expo_example.png'>
+    <img src='https://raw.githubusercontent.com/UnBArqDsw2021-1/2021.1_G01_Animalesco_FrontEnd/main/assets/images/expo_example.png'>
 </p>
 
 Nessa aba você verá um QR code que você poderá conectar com o aplicativo em seu celular;
