@@ -7,12 +7,12 @@ import colors from "@assets/styles/colors";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 
-export const ModalRegister = ({ visible, setVisible }) => {
+export const ModalRegister = ({ visible, setVisible, petId }) => {
   const navigation = useNavigation();
 
   const onPressSubmit = (destination) => {
     setVisible(false);
-    navigation.navigate(destination);
+    navigation.navigate(destination, { petId });
   };
 
   return (

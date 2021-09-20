@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
   View,
   Text,
@@ -31,6 +31,9 @@ export const RegisterVaccine = () => {
   const [doseRepeatData, setDoseRepeatData] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [erro, setErro] = useState("");
+
+  const routes = useRoute();
+  const { petId } = routes.params;
 
   const navigation = useNavigation();
   setStatusBarStyle("dark");
@@ -64,7 +67,7 @@ export const RegisterVaccine = () => {
     }
 
     const data = {
-      pet_id: 7,
+      pet_id: petId,
       name: nameVaccine,
       application_date: formatDateToRequest(doseData),
       next_application_date: formatDateToRequest(doseRepeatData),

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 import {
@@ -14,7 +14,6 @@ import styles from "./styles";
 import defaultStyles from "@screens/styles.js";
 import colors from "@assets/styles/colors";
 
-import { ModalRegister } from "./components/ModalRegister";
 import { Header, Add, Footer } from "@components";
 
 import { formatToBrPattern } from "@utilites";
@@ -22,9 +21,9 @@ import { useUser, usePets } from "@store";
 import { useService, userService, petService } from "@services";
 
 export const Home = () => {
-  const [modalVisible, setModalVisible] = useState(false);
   const { user, setUser } = useUser();
   const { pets, setPets } = usePets();
+  const navigation = useNavigation();
 
   setStatusBarStyle("light");
 
@@ -62,7 +61,11 @@ export const Home = () => {
         <ScrollView>
           <View style={styles.content}>
             {pets.map((pet, id) => (
-              <TouchableOpacity key={id} style={styles.cardContainer}>
+              <TouchableOpacity
+                key={id}
+                style={styles.cardContainer}
+                onPress={() => navigation.navigate("petperfil", pet.id)}
+              >
                 <View style={styles.cardImage}>
                   <FontAwesome5 name="paw" size={50} color={colors.light} />
                 </View>
@@ -84,8 +87,7 @@ export const Home = () => {
             ))}
           </View>
         </ScrollView>
-        <ModalRegister visible={modalVisible} setVisible={setModalVisible} />
-        <Add destination="petinformation" />
+        <Add action={() => navigation.navigate("petinformation")} />
         <Footer />
       </View>
     </View>
