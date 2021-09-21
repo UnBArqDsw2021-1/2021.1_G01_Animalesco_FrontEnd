@@ -38,12 +38,9 @@ export const PetPerfil = () => {
         </View>
         {pet ? (
           <View style={styles.information}>
-            <Text>Nome : {pet.name} </Text>
-            <Text>Especie: {pet.specie_name}</Text>
-            <Text>
-              Raça: {pet.breed_name}
-            </Text>
-            <Text>{pet.color}</Text>
+            <Text style={styles.cardTitle}>{pet.name} </Text>
+            <Text style={styles.cardText}>Especie: {pet.specie_name}                Sexo: {pet.sex}</Text>
+            <Text style={styles.cardText}>Cor: {pet.color}    Raça: { pet.breed_name}</Text>
           </View>
         ) : (
           <ActivityIndicator size="large" color={colors.dark} />

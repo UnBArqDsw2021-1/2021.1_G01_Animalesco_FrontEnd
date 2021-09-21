@@ -11,18 +11,32 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
     backgroundColor: colors.secondary,
-    marginTop: -140
+    top: - 50
+    
   },
   information: {
-    width: "95%",
+    width: "100%",
     height: 100,
     display: "flex",
     flexDirection: "column",
     borderRadius: 5,
-    backgroundColor: colors.light,
+    backgroundColor: colors.secondary,
     marginVertical: 5,
-    marginTop: 50,
-    marginLeft: 10,
+    marginBottom: 26
   },
+  cardTitle: {
+    fontSize: 15,
+    top: - 50,
+    fontWeight: "bold",
+    alignItems: "center",
+    marginLeft: 120
+  },
+  cardText:{
+    fontSize: 12,
+    alignItems: "center",
+    marginLeft: 5
+
+  }
+
 });
 export default styles;
