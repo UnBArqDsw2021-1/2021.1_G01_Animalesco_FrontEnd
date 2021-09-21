@@ -12,6 +12,7 @@ const colors = {
   gray: "#35353554",
   grayLight: "#35353514",
   light: "#f7f7f7",
+  lightToBackground: "#f7f7f744",
   ice: "#EEEEEE",
 };
 

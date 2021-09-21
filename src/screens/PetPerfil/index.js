@@ -33,14 +33,24 @@ export const PetPerfil = () => {
     <View style={defaultStyles.page}>
       <GoBackHeader />
       <View style={defaultStyles.container}>
-        <View style={styles.cardImage}>
-          <FontAwesome5 name="paw" size={150} color={colors.primary} />
-        </View>
         {pet ? (
           <View style={styles.information}>
-            <Text style={styles.cardTitle}>{pet.name} </Text>
-            <Text style={styles.cardText}>Especie: {pet.specie_name}                Sexo: {pet.sex}</Text>
-            <Text style={styles.cardText}>Cor: {pet.color}    Raça: { pet.breed_name}</Text>
+            <View style={styles.cardImage}>
+              <FontAwesome5 name="paw" size={150} color={colors.light} />
+              <View style={styles.contentCardTitle}>
+                <Text style={styles.cardTitle}>{pet.name}</Text>
+              </View>
+            </View>
+            <View style={styles.contentInfo}>
+              <View style={styles.info}>
+                <Text style={styles.cardText}>Especie: {pet.specie_name}</Text>
+                <Text style={styles.cardText}>Sexo: {pet.sex}</Text>
+              </View>
+              <View style={styles.info}>
+                <Text style={styles.cardText}>Cor: {pet.color}</Text>
+                <Text style={styles.cardText}>Raça: {pet.breed_name}</Text>
+              </View>
+            </View>
           </View>
         ) : (
           <ActivityIndicator size="large" color={colors.dark} />
