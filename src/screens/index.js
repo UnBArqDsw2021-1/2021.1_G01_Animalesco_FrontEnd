@@ -7,3 +7,5 @@ export { PetInformation } from "./NewPet/PetInformation";
 export { SpecieBreed } from "./NewPet/SpecieBreed";
 export { ColorSex } from "./NewPet/ColorSex";
 export { PetPhoto } from "./NewPet/Photo";
+export { RegisterVaccine } from "./RegisterVaccine";
+export { PetPerfil } from "./PetPerfil";

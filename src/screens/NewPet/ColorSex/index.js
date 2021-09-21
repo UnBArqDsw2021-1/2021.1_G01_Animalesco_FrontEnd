@@ -67,8 +67,6 @@ export const ColorSex = () => {
             <View style={defaultStyles.formCadastro}>
               <Text style={defaultStyles.inputTopText}>Cor</Text>
               <TextInput
-                keyboardType="email-address"
-                autoCorrect={false}
                 style={defaultStyles.input}
                 onChangeText={setColor}
                 value={color}

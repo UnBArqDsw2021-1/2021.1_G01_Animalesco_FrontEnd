@@ -21,11 +21,13 @@ import colors from "@assets/styles/colors";
 import { Stepper, GoBackHeader, WaterMark, Alert } from "@components";
 import { useService, petService } from "@services";
 import { formatDateToRequest } from "@utilites";
+import { usePets } from "@store";
 
 export const PetPhoto = () => {
   const [image, setImage] = useState(null);
   const [erro, setErro] = useState("");
   const [newPetRequest, setNewPetRequest] = useState();
+  const { pets, setPets } = usePets();
 
   const navigation = useNavigation();
   const routes = useRoute();
@@ -76,6 +78,7 @@ export const PetPhoto = () => {
       return;
     }
 
+    setPets([...pets, response.data]);
     setNewPetRequest(false);
     navigation.navigate("home");
   };

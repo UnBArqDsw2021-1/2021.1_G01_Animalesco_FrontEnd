@@ -7,6 +7,14 @@ const splitDay = (value) => {
   return [year, month, day];
 };
 
+export const formatToBrPattern = (value) => {
+  const [year, month, day] = value.split("-");
+
+  const dateStr = [day, month, year].join("/");
+
+  return dateStr;
+};
+
 export const validateDate = (value) => {
   if (value.length !== 10) {
     return false;
@@ -26,6 +34,20 @@ export const validatePetBirthDay = (value) => {
     if (limitDay > petBirthday || currentDay < petBirthday) {
       return false;
     }
+  }
+
+  return true;
+};
+
+export const validateDateAfterOther = (before, after) => {
+  const [yearBefore, monthBefore, dayBefore] = splitDay(before);
+  const [yearAfter, monthAfter, dayAfter] = splitDay(after);
+
+  const dateBefore = new Date(yearBefore, monthBefore, dayBefore);
+  const dateAfter = new Date(yearAfter, monthAfter, dayAfter);
+
+  if (dateBefore > dateAfter) {
+    return false;
   }
 
   return true;
@@ -74,7 +96,14 @@ export const formatDate = (value) => {
 };
 
 export const formatDateToRequest = (value) => {
-  const [year, month, day] = splitDay(value);
+  const [yyyy, mm, dd] = splitDay(value);
 
-  return [year, month, day].join("-");
+  const month = parseInt(mm) + 1;
+  const day = parseInt(dd);
+
+  return [
+    yyyy,
+    month.toString().padStart(2, "0"),
+    day.toString().padStart(2, "0"),
+  ].join("-");
 };
