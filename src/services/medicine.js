@@ -14,7 +14,7 @@ class MedicineService {
       name: name,
       start_date: start_date,
       finish_date: finish_date,
-      application_time: application_time
+      application_time: application_time,
     };
 
     const response = await api.post(`/pets/${pet_id}/medicines/`, data);
