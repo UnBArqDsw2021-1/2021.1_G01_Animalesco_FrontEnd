@@ -1,4 +1,4 @@
-import React, {useStatem, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import { setStatusBarStyle } from "expo-status-bar";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import {
@@ -31,6 +31,7 @@ export const RegisterMedicine = () => {
     const [finishDate, setFinishDate] = useState("");
     const [erro, setErro] = useState("");
     const [medicineRequest, setMedicineRequest] = useState(false);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     const routes = useRoute();
     const { petId } = routes.params;

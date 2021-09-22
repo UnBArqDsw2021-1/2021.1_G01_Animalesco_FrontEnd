@@ -8,7 +8,7 @@ class MedicineService {
     name,
     start_date,
     finish_date,
-    application_date,
+    application_time,
   }) {
     const data = {
       name: name,
