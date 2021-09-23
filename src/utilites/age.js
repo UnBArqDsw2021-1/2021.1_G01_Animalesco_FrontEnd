@@ -1,11 +1,11 @@
-export const validateHeight = (value) => {
+export const validateAge = (value) => {
   if (value > 4 || value < 0.05) {
     return false;
   }
   return true;
 };
 
-export const height = (value) => {
+export const age = (value) => {
   var currentDate = new Date();
   var birthdayDate = new Date(value);
 
@@ -19,11 +19,12 @@ export const height = (value) => {
 
   var yearsOld = curreteYear - birthdayYear;
 
-  if (currentMonth < birthdayMonth || currentMonth == birthdayMonth && currentDay < birthdayDay) {
+  if (
+    currentMonth < birthdayMonth ||
+    (currentMonth == birthdayMonth && currentDay < birthdayDay)
+  ) {
     yearsOld--;
   }
 
   return yearsOld < 0 ? 0 : yearsOld;
 };
-
-

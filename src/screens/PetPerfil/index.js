@@ -11,7 +11,7 @@ import colors from "@assets/styles/colors";
 import { ModalRegister } from "./components";
 import { Add, GoBackHeader } from "@components";
 import styles from "./styles";
-import { height } from "../../utilites";
+import { age } from "../../utilites";
 
 export const PetPerfil = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -43,8 +43,10 @@ export const PetPerfil = () => {
               </View>
             </View>
             <View style={styles.contentInfo}>
-            <View style={styles.info}>
-                <Text style={styles.cardText}>Idade: {height(pet.birth_date)} anos</Text>
+              <View style={styles.info}>
+                <Text style={styles.cardText}>
+                  Idade: {age(pet.birth_date)} anos
+                </Text>
                 <Text style={styles.cardText}>Raça: {pet.breed_name}</Text>
               </View>
               <View style={styles.info}>
