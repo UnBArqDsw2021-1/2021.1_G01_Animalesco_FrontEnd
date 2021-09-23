@@ -3,18 +3,11 @@ import api from "./api";
 class MedicineService {
   constructor() {}
 
-  async createMedicine({
-    pet_id,
-    name,
-    start_date,
-    finish_date,
-    application_time,
-  }) {
+  async createMedicine({ pet_id, name, start_date, finish_date }) {
     const data = {
       name: name,
       start_date: start_date,
       finish_date: finish_date,
-      application_time: application_time,
     };
 
     const response = await api.post(`/pets/${pet_id}/medicines/`, data);

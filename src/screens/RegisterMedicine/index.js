@@ -39,7 +39,7 @@ export const RegisterMedicine = () => {
   const navigation = useNavigation();
   setStatusBarStyle("dark");
 
-  // efeito do botão, preencher somente quando todos obrigatorios estiverem preenchidos
+  // Efeito do botão, preencher somente quando todos obrigatorios estiverem preenchidos
   useEffect(() => {
     if (nameMedicine && startDate) {
       setButtonDisabled(false);
@@ -48,6 +48,7 @@ export const RegisterMedicine = () => {
     }
   }, [nameMedicine, startDate]);
 
+  // Função de submit do registro de remédio
   const submitHandler = async () => {
     setErro("");
     setMedicineRequest(true);
@@ -58,24 +59,25 @@ export const RegisterMedicine = () => {
       return;
     }
 
-    if (!validateDate(finishDate)) {
-      setErro("Data inválida");
-      setMedicineRequest(false);
-      return;
-    }
+    if (finishDate) {
+      if (!validateDate(finishDate)) {
+        setErro("Data inválida");
+        setMedicineRequest(false);
+        return;
+      }
 
-    if (!validateDateAfterOther(startDate, finishDate)) {
-      setErro("A data final da medicação deve ser após a primeira data");
-      setMedicineRequest(false);
-      return;
+      if (!validateDateAfterOther(startDate, finishDate)) {
+        setErro("A data final da medicação deve ser após a primeira data");
+        setMedicineRequest(false);
+        return;
+      }
     }
 
     const data = {
       pet_id: petId,
       name: nameMedicine,
       start_date: formatDateToRequest(startDate),
-      finish_date: formatDateToRequest(finishDate),
-      //    application_time: application_time,
+      finish_date: finishDate ? formatDateToRequest(finishDate) : null,
     };
 
     const response = await useService(medicineService, "createMedicine", [
