@@ -1,20 +1,31 @@
-export const formatAge = (value) => {
-  var currentDate = new Date();
-  var birthdayDate = new Date(value);
+const splitDate = (value) => {
+  const [yyyy, mm, dd] = value.split("-");
+  const year = parseInt(yyyy);
+  const month = parseInt(mm);
+  const day = parseInt(dd);
 
-  var curreteYear = currentDate.getFullYear();
+  return [year, month, day];
+};
+
+export const formatAge = (value) => {
+  const [yyyy, mm, dd] = splitDate(value);
+
+  var currentDate = new Date();
+  var birthdayDate = new Date(yyyy, mm, dd);
+
+  var currentYear = currentDate.getFullYear();
   var currentMonth = currentDate.getMonth();
-  var currentDay = currentDate.getDay();
+  var currentDay = currentDate.getDate();
 
   var birthdayYear = birthdayDate.getFullYear();
   var birthdayMonth = birthdayDate.getMonth();
-  var birthdayDay = birthdayDate.getDay();
+  var birthdayDay = birthdayDate.getDate();
 
-  var yearsOld = curreteYear - birthdayYear;
+  var yearsOld = currentYear - birthdayYear;
 
   if (
     currentMonth < birthdayMonth ||
-    (currentMonth == birthdayMonth && currentDay < birthdayDay)
+    (currentMonth === birthdayMonth && currentDay < birthdayDay)
   ) {
     yearsOld--;
   }
