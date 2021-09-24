@@ -1,11 +1,4 @@
-export const validateAge = (value) => {
-  if (value > 4 || value < 0.05) {
-    return false;
-  }
-  return true;
-};
-
-export const age = (value) => {
+export const formatAge = (value) => {
   var currentDate = new Date();
   var birthdayDate = new Date(value);
 

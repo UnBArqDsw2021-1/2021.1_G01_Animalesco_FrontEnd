@@ -9,4 +9,5 @@ export {
   validateDateAfterOther,
   formatToBrPattern,
 } from "./date.js";
-export { validateAge, age } from "./age.js";
+export { formatAge } from "./age.js";
+export { validateHeight } from "./height.js";

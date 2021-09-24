@@ -166,7 +166,13 @@
 <a name='L107'></a><a href='#L107'>107</a>
 <a name='L108'></a><a href='#L108'>108</a>
 <a name='L109'></a><a href='#L109'>109</a>
-<a name='L110'></a><a href='#L110'>110</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">11x</span>
@@ -175,19 +181,13 @@
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -207,6 +207,7 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -219,6 +220,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -263,6 +265,7 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -274,6 +277,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const splitDay = (value) =&gt; {
   const [dd, mm, yyyy] = value.split("/");
@@ -284,14 +296,7 @@
   return [year, month, day];
 };
 &nbsp;
-export const formatToBrPattern = (value) =&gt; {
-  const [year, month, day] = value.split("-");
-&nbsp;
-  const dateStr = [day, month, year].join("/");
-&nbsp;
-  return dateStr;
-};
-&nbsp;
+//Recebe DD/MM/YYYY
 export const validateDate = (value) =&gt; {
   if (value.length !== 10) {
     return false;
@@ -299,6 +304,7 @@ export const validateDate = (value) =&gt; {
   return true;
 };
 &nbsp;
+//Recebe DD/MM/YYYY
 export const validatePetBirthDay = (value) =&gt; {
   if (value.length === 10) {
     const currentDay = new Date();
@@ -316,6 +322,7 @@ export const validatePetBirthDay = (value) =&gt; {
   return true;
 };
 &nbsp;
+//Recebe before = DD/MM/YYYY e after = DD/MM/YYYY
 export const validateDateAfterOther = (before, after) =&gt; {
   const [yearBefore, monthBefore, dayBefore] = splitDay(before);
   const [yearAfter, monthAfter, dayAfter] = splitDay(after);
@@ -330,6 +337,7 @@ export const validateDateAfterOther = (before, after) =&gt; {
   return true;
 };
 &nbsp;
+//Recebe DDMMYYYY
 export const formatDate = (value) =&gt; {
   const src = (value || "").replace(/[^\d/]/g, "");
   const srcLength = src.length;
@@ -372,6 +380,7 @@ export const formatDate = (value) =&gt; {
   return outString;
 };
 &nbsp;
+//Recebe DD/MM/YYYY
 export const formatDateToRequest = (value) =&gt; {
   const [yyyy, mm, dd] = splitDay(value);
 &nbsp;
@@ -384,6 +393,15 @@ export const formatDateToRequest = (value) =&gt; {
     day.toString().padStart(2, "0"),
   ].join("-");
 };
+&nbsp;
+//Recebe YYYY-MM-DD
+export const formatToBrPattern = (value) =&gt; {
+  const [year, month, day] = value.split("-");
+&nbsp;
+  const dateStr = [day, month, year].join("/");
+&nbsp;
+  return dateStr;
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -391,7 +409,7 @@ export const formatDateToRequest = (value) =&gt; {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Sep 23 2021 18:36:57 GMT-0300 (GMT-03:00)
+                at Thu Sep 23 2021 20:30:05 GMT-0300 (GMT-03:00)
             </div>
         </div>
         <script src="prettify.js"></script>
