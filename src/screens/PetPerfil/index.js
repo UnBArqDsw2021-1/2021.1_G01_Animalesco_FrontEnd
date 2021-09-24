@@ -32,30 +32,73 @@ export const PetPerfil = () => {
 
   return (
     <View style={defaultStyles.page}>
-      <GoBackHeader />
+      <GoBackHeader icon="white" background="transparent" />
       <View style={defaultStyles.container}>
         {pet ? (
-          <View style={styles.information}>
+          <View style={styles.content}>
             <View style={styles.cardImage}>
               <FontAwesome5 name="paw" size={150} color={colors.light} />
-              <View style={styles.contentCardTitle}>
-                <Text style={styles.cardTitle}>{pet.name}</Text>
-              </View>
             </View>
             <View style={styles.contentInfo}>
-              <View style={styles.info}>
-                <Text style={styles.cardText}>
-                  Idade: {formatAge(pet.birth_date)} anos
-                </Text>
-                <Text style={styles.cardText}>Raça: {pet.breed_name}</Text>
+              <View style={styles.contentTitle}>
+                <View>
+                  <Text style={styles.title}>{pet.name}</Text>
+                  <Text style={styles.subTitle}>
+                    {pet.specie_name} - {pet.sex}
+                  </Text>
+                </View>
+                <View style={styles.contentBreed}>
+                  <Text style={styles.breedText}>{pet.breed_name}</Text>
+                </View>
               </View>
               <View style={styles.info}>
-                <Text style={styles.cardText}>Especie: {pet.specie_name}</Text>
-                <Text style={styles.cardText}>Sexo: {pet.sex}</Text>
-              </View>
-              <View style={styles.info}>
-                <Text style={styles.cardText}>Cor: {pet.color}</Text>
-                <Text style={styles.cardText}>Peso: </Text>
+                <View style={styles.cardInfo({ color: colors.secondaryBlue })}>
+                  <View style={styles.topCardInfo}>
+                    <Text style={styles.topText}>{pet.color}</Text>
+                  </View>
+                  <View
+                    style={styles.bottomCardInfo({
+                      color: colors.secondaryBlue,
+                    })}
+                  >
+                    <Text style={{ color: colors.light }}>cor</Text>
+                  </View>
+                </View>
+
+                <View style={styles.cardInfo({ color: colors.primary })}>
+                  <View style={styles.topCardInfo}>
+                    <Text style={styles.topText}>--</Text>
+                  </View>
+                  <View
+                    style={styles.bottomCardInfo({ color: colors.primary })}
+                  >
+                    <Text style={{ color: colors.light }}>peso</Text>
+                  </View>
+                </View>
+                <View style={styles.cardInfo({ color: colors.secondaryGreen })}>
+                  <View style={styles.topCardInfo}>
+                    <Text style={styles.topText}>--</Text>
+                  </View>
+                  <View
+                    style={styles.bottomCardInfo({
+                      color: colors.secondaryGreen,
+                    })}
+                  >
+                    <Text style={{ color: colors.light }}>altura</Text>
+                  </View>
+                </View>
+                <View style={styles.cardInfo({ color: colors.secondary })}>
+                  <View style={styles.topCardInfo}>
+                    <Text style={styles.topText}>
+                      {formatAge(pet.birth_date)}
+                    </Text>
+                  </View>
+                  <View
+                    style={styles.bottomCardInfo({ color: colors.secondary })}
+                  >
+                    <Text style={{ color: colors.light }}>idade</Text>
+                  </View>
+                </View>
               </View>
             </View>
           </View>

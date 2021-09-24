@@ -16,7 +16,7 @@ export const ModalRegister = ({ visible, setVisible, petId }) => {
   };
 
   return (
-    <View>
+    <View style={styles.page}>
       <Modal
         animationType="slide"
         transparent={true}
