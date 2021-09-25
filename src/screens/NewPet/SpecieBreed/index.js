@@ -8,8 +8,9 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Platform,
 } from "react-native";
-import { Picker } from "@react-native-community/picker";
+import { Picker, PickerIOS } from "@react-native-community/picker";
 import defaultStyles from "@screens/styles.js";
 
 import { Stepper, GoBackHeader, WaterMark } from "@components";
@@ -96,32 +97,69 @@ export const SpecieBreed = () => {
             <View style={defaultStyles.formCadastro}>
               <Text style={defaultStyles.inputTopText}>Espécie</Text>
               <View style={defaultStyles.pickerContent}>
-                <Picker
-                  style={defaultStyles.picker}
-                  selectedValue={species}
-                  onValueChange={setSpecies}
-                >
-                  {allSpecies.map((specie, id) => (
-                    <Picker.Item
-                      key={id}
-                      label={specie.name}
-                      value={specie.id}
-                    />
-                  ))}
-                </Picker>
+                {Platform.OS === "ios" ? (
+                  <PickerIOS
+                    style={defaultStyles.picker}
+                    selectedValue={species}
+                    onValueChange={setSpecies}
+                  >
+                    {allSpecies.map((specie, id) => (
+                      <PickerIOS.Item
+                        key={id}
+                        label={specie.name}
+                        value={specie.id}
+                      />
+                    ))}
+                  </PickerIOS>
+                ) : (
+                  <Picker
+                    style={defaultStyles.picker}
+                    selectedValue={species}
+                    onValueChange={setSpecies}
+                  >
+                    {allSpecies.map((specie, id) => (
+                      <Picker.Item
+                        key={id}
+                        label={specie.name}
+                        value={specie.id}
+                      />
+                    ))}
+                  </Picker>
+                )}
               </View>
               <Text style={defaultStyles.inputTopText}>Raça</Text>
               <View style={defaultStyles.pickerContent}>
-                <Picker
-                  style={defaultStyles.picker}
-                  selectedValue={breeds}
-                  onValueChange={setBreeds}
-                  enabled={species !== -1 ? true : false}
-                >
-                  {allBreed.map((breed, id) => (
-                    <Picker.Item key={id} label={breed.name} value={breed.id} />
-                  ))}
-                </Picker>
+                {Platform.OS === "ios" ? (
+                  <PickerIOS
+                    style={defaultStyles.picker}
+                    selectedValue={breeds}
+                    onValueChange={setBreeds}
+                    enabled={species !== -1 ? true : false}
+                  >
+                    {allBreed.map((breed, id) => (
+                      <PickerIOS.Item
+                        key={id}
+                        label={breed.name}
+                        value={breed.id}
+                      />
+                    ))}
+                  </PickerIOS>
+                ) : (
+                  <Picker
+                    style={defaultStyles.picker}
+                    selectedValue={breeds}
+                    onValueChange={setBreeds}
+                    enabled={species !== -1 ? true : false}
+                  >
+                    {allBreed.map((breed, id) => (
+                      <Picker.Item
+                        key={id}
+                        label={breed.name}
+                        value={breed.id}
+                      />
+                    ))}
+                  </Picker>
+                )}
               </View>
               <TouchableOpacity
                 style={
