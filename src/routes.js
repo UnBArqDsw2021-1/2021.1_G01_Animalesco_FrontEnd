@@ -12,6 +12,7 @@ import {
   RegisterVaccine,
   ColorSex,
   PetPerfil,
+  Calendar,
 } from "@screens";
 
 const Stack = createStackNavigator();
@@ -34,6 +35,7 @@ const Routes = () => {
       <Stack.Screen name="petphoto" component={PetPhoto} />
       <Stack.Screen name="registervaccine" component={RegisterVaccine} />
       <Stack.Screen name="petperfil" component={PetPerfil} />
+      <Stack.Screen name="calendar" component={Calendar} />
     </Stack.Navigator>
   );
 };
