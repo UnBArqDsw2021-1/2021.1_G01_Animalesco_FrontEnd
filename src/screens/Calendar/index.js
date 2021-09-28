@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import defaultStyles from "@screens/styles.js";
@@ -9,7 +10,11 @@ import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
 
 export const Calendar = () => {
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(
+    moment(new Date()).format("yyyy-MM-DD")
+  );
+  const navigation = useNavigation();
+
   return (
     <View style={defaultStyles.page}>
       <GoBackHeader />
@@ -43,7 +48,7 @@ export const Calendar = () => {
             }}
             onDateChange={setSelectedDate}
           />
-          <Add />
+          <Add action={() => navigation.navigate("vetvisit")} />
         </View>
         <View style={styles.hr}></View>
         <View style={styles.vetVisits}>

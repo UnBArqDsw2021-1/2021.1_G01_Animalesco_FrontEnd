@@ -10,3 +10,4 @@ export { PetPhoto } from "./NewPet/Photo";
 export { RegisterVaccine } from "./RegisterVaccine";
 export { PetPerfil } from "./PetPerfil";
 export { Calendar } from "./Calendar";
+export { VetVisit } from "./VetVisit";
