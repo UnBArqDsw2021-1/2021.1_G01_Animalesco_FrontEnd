@@ -6,3 +6,4 @@ export { petService } from "./pet";
 export { specieService } from "./specie";
 export { vaccineService } from "./vaccine";
 export { useService } from "./useService";
+export { medicineService } from "./medicine";

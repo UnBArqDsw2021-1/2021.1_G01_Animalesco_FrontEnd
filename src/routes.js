@@ -10,6 +10,7 @@ import {
   SpecieBreed,
   PetPhoto,
   RegisterVaccine,
+  RegisterMedicine,
   ColorSex,
   PetPerfil,
 } from "@screens";
@@ -34,6 +35,7 @@ const Routes = () => {
       <Stack.Screen name="petphoto" component={PetPhoto} />
       <Stack.Screen name="registervaccine" component={RegisterVaccine} />
       <Stack.Screen name="petperfil" component={PetPerfil} />
+      <Stack.Screen name="registermedicine" component={RegisterMedicine} />
     </Stack.Navigator>
   );
 };

@@ -16,7 +16,7 @@ export const ModalRegister = ({ visible, setVisible, petId }) => {
   };
 
   return (
-    <View>
+    <View style={styles.page}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -38,7 +38,10 @@ export const ModalRegister = ({ visible, setVisible, petId }) => {
               <FontAwesome5 name="syringe" size={40} color={colors.dark} />
               <Text style={styles.optionsText}>Vacina</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.optionsWithoutBorder}>
+            <TouchableOpacity
+              style={styles.optionsWithoutBorder}
+              onPress={() => onPressSubmit("registermedicine")}
+            >
               <FontAwesome5 name="pills" size={40} color={colors.dark} />
               <Text style={styles.optionsText}>Remédio</Text>
             </TouchableOpacity>

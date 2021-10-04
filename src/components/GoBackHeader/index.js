@@ -1,17 +1,25 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import styles from "./styles.js";
 import colors from "@assets/styles/colors";
 
-export const GoBackHeader = () => {
+export const GoBackHeader = ({ icon = "orange", background = "white" }) => {
   const navigation = useNavigation();
 
   return (
-    <View style={styles.header}>
+    <View
+      style={
+        background === "white" ? styles.header : styles.headerWithoutBackground
+      }
+    >
       <TouchableOpacity onPress={() => navigation.goBack()}>
-        <AntDesign name="arrowleft" size={24} color={colors.primary} />
+        <FontAwesome5
+          name="chevron-left"
+          size={24}
+          color={icon === "orange" ? colors.primary : colors.light}
+        />
       </TouchableOpacity>
     </View>
   );

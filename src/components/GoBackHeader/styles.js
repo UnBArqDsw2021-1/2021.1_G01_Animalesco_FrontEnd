@@ -15,6 +15,17 @@ const styles = StyleSheet.create({
     top: 0,
     zIndex: 20,
   },
+  headerWithoutBackground: {
+    position: "absolute",
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+    height: Constants.statusBarHeight + 55,
+    paddingLeft: 20,
+    paddingTop: Constants.statusBarHeight,
+    top: 0,
+    zIndex: 20,
+  },
 });
 
 export default styles;

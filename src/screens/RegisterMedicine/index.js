@@ -21,16 +21,17 @@ import {
   formatDateToRequest,
   validateDateAfterOther,
 } from "@utilites";
-import { GoBackHeader, Alert } from "@components";
-import { useService, vaccineService } from "@services";
 
-export const RegisterVaccine = () => {
-  const [nameVaccine, setNameVaccine] = useState("");
-  const [doseData, setDoseData] = useState("");
-  const [doseRepeatData, setDoseRepeatData] = useState("");
-  const [vaccineRequest, setVaccineRequest] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(true);
+import { GoBackHeader, Alert } from "@components";
+import { useService, medicineService } from "@services";
+
+export const RegisterMedicine = () => {
+  const [nameMedicine, setNameMedicine] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [finishDate, setFinishDate] = useState("");
   const [erro, setErro] = useState("");
+  const [medicineRequest, setMedicineRequest] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const routes = useRoute();
   const { petId } = routes.params;
@@ -38,53 +39,58 @@ export const RegisterVaccine = () => {
   const navigation = useNavigation();
   setStatusBarStyle("dark");
 
+  // Efeito do botão, preencher somente quando todos obrigatorios estiverem preenchidos
   useEffect(() => {
-    if (doseData && nameVaccine) {
+    if (nameMedicine && startDate) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [doseData, nameVaccine]);
+  }, [nameMedicine, startDate]);
 
+  // Função de submit do registro de remédio
   const submitHandler = async () => {
     setErro("");
-    setVaccineRequest(true);
+    setMedicineRequest(true);
 
-    if (!validateDate(doseData)) {
+    if (!validateDate(startDate)) {
       setErro("Data inválida");
-      setVaccineRequest(false);
+      setMedicineRequest(false);
       return;
     }
 
-    if (doseRepeatData) {
-      if (!validateDate(doseRepeatData)) {
+    if (finishDate) {
+      if (!validateDate(finishDate)) {
         setErro("Data inválida");
-        setVaccineRequest(false);
+        setMedicineRequest(false);
         return;
       }
-      if (!validateDateAfterOther(doseData, doseRepeatData)) {
-        setErro("A data da segunda dose deve ser após a primeira dose");
-        setVaccineRequest(false);
+
+      if (!validateDateAfterOther(startDate, finishDate)) {
+        setErro("A data final da medicação deve ser após a primeira data");
+        setMedicineRequest(false);
         return;
       }
     }
 
     const data = {
       pet_id: petId,
-      name: nameVaccine,
-      application_date: formatDateToRequest(doseData),
-      next_application_date: formatDateToRequest(doseRepeatData),
+      name: nameMedicine,
+      start_date: formatDateToRequest(startDate),
+      finish_date: finishDate ? formatDateToRequest(finishDate) : null,
     };
 
-    const response = await useService(vaccineService, "createVaccine", [data]);
+    const response = await useService(medicineService, "createMedicine", [
+      data,
+    ]);
 
     if (response.error) {
-      setErro("Error ao registrar vacina. Tente novamente");
-      setVaccineRequest(false);
+      setErro("Error ao registrar medicamento. Tente novamente");
+      setMedicineRequest(false);
       return;
     }
 
-    setVaccineRequest(false);
+    setMedicineRequest(false);
     navigation.navigate("home");
   };
 
@@ -98,34 +104,38 @@ export const RegisterVaccine = () => {
         >
           <View style={defaultStyles.content}>
             <View style={defaultStyles.formCadastro}>
-              <Text style={defaultStyles.inputTopText}>Nome da vacina</Text>
+              <Text style={defaultStyles.inputTopText}>
+                Nome do medicamento
+              </Text>
               <TextInput
                 style={defaultStyles.input}
                 autoCorrect={false}
                 placeholderTextColor={colors.gray}
-                onChangeText={setNameVaccine}
-                value={nameVaccine}
+                onChangeText={setNameMedicine}
+                value={nameMedicine}
               />
-              <Text style={defaultStyles.inputTopText}>Data da dose</Text>
+              <Text style={defaultStyles.inputTopText}>
+                Data do medicamento
+              </Text>
               <TextInput
                 style={defaultStyles.input}
-                onChangeText={(res) => setDoseData(formatDate(res))}
-                value={doseData}
+                onChangeText={(res) => setStartDate(formatDate(res))}
+                value={startDate}
                 placeholder="dd/mm/aaaa"
                 keyboardType="numeric"
               />
               <Text style={defaultStyles.inputTopText}>
-                Data da próxima dose
+                Data final do medicamento
               </Text>
               <TextInput
                 style={defaultStyles.input}
-                onChangeText={(res) => setDoseRepeatData(formatDate(res))}
-                value={doseRepeatData}
+                onChangeText={(res) => setFinishDate(formatDate(res))}
+                value={finishDate}
                 placeholder="dd/mm/aaaa"
                 keyboardType="numeric"
               />
               {erro !== "" && <Alert message={erro} />}
-              {vaccineRequest ? (
+              {medicineRequest ? (
                 <ActivityIndicator size="large" color={colors.light} />
               ) : (
                 <TouchableOpacity
