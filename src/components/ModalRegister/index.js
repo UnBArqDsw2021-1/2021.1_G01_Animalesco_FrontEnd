@@ -7,7 +7,7 @@ import colors from "@assets/styles/colors";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 
-export const ModalRegister = ({ visible, setVisible, petId }) => {
+export const ModalRegister = ({ visible, setVisible, petId = null }) => {
   const navigation = useNavigation();
 
   const onPressSubmit = (destination) => {
@@ -38,9 +38,16 @@ export const ModalRegister = ({ visible, setVisible, petId }) => {
               <FontAwesome5 name="syringe" size={40} color={colors.dark} />
               <Text style={styles.optionsText}>Vacina</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.optionsWithoutBorder}>
+            <TouchableOpacity style={styles.options}>
               <FontAwesome5 name="pills" size={40} color={colors.dark} />
               <Text style={styles.optionsText}>Remédio</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.optionsWithoutBorder}
+              onPress={() => onPressSubmit("visitDescription")}
+            >
+              <FontAwesome5 name="cat" size={40} color={colors.dark} />
+              <Text style={styles.optionsText}>Veterinário</Text>
             </TouchableOpacity>
           </View>
         </TouchableOpacity>

@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import styles from "./styles";
 import defaultStyles from "@screens/styles.js";
 
-import { Header, Add, GoBackHeader } from "@components";
+import { ModalRegister, Add, GoBackHeader } from "@components";
 import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
 
@@ -13,6 +13,7 @@ export const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(
     moment(new Date()).format("yyyy-MM-DD")
   );
+  const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
 
   return (
@@ -48,7 +49,8 @@ export const Calendar = () => {
             }}
             onDateChange={setSelectedDate}
           />
-          <Add action={() => navigation.navigate("description")} />
+          <ModalRegister visible={modalVisible} setVisible={setModalVisible} />
+          <Add withoutFooter action={() => setModalVisible(true)} />
         </View>
         <View style={styles.hr}></View>
         <View style={styles.vetVisits}>

@@ -38,7 +38,7 @@ const Routes = () => {
       <Stack.Screen name="registervaccine" component={RegisterVaccine} />
       <Stack.Screen name="petperfil" component={PetPerfil} />
       <Stack.Screen name="calendar" component={Calendar} />
-      <Stack.Screen name="description" component={Description} />
+      <Stack.Screen name="visitDescription" component={Description} />
       <Stack.Screen name="dateVisit" component={DateVisit} />
     </Stack.Navigator>
   );

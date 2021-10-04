@@ -1,1 +1,0 @@
-export { ModalRegister } from "./ModalRegister";

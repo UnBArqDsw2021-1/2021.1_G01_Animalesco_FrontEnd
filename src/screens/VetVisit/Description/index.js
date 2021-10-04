@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { setStatusBarStyle } from "expo-status-bar";
 import {
   KeyboardAvoidingView,
   View,
@@ -12,42 +13,36 @@ import {
   Alert,
 } from "react-native";
 import { Picker, PickerIOS } from "@react-native-community/picker";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import colors from "@assets/styles/colors";
 
 import styles from "./styles";
 import defaultStyles from "@screens/styles.js";
 
 import { GoBackHeader } from "@components";
-import {
-  useService,
-  vetVisitService,
-  userService,
-  petService,
-} from "@services";
-import { useUser, usePets } from "@store";
-import { validateDate, formatDateToRequest } from "@utilites";
+import { useService, vetVisitService } from "@services";
+import { usePets } from "@store";
 
 export const Description = () => {
   const [erro, setErro] = useState("");
   const [newVisitRequest, setNewVisitRequest] = useState();
   const [buttonDisabled, setButtonDisabled] = useState(true);
-
-  const { user, setUser } = useUser();
-  const { pets, setPets } = usePets();
-
-  const [userPets, setUserPets] = useState([{ name: "--", id: -1 }]);
-  const [pet, setPet] = useState(null);
-
   const [vetClinic, setVetClinic] = useState("");
   const [description, setDescription] = useState(null);
-  const [visitDate, setVisitDate] = useState("");
-  const [nextVisitDate, setNextVisitDate] = useState(null);
+  const [selectedPetId, setSelectedPetId] = useState();
+
+  const { pets } = usePets();
+
+  const routes = useRoute();
+  const { petId } = routes.params;
+
+  const navigation = useNavigation();
+  setStatusBarStyle("dark");
 
   useEffect(() => {
-    if (!user) {
-      getUser();
+    if (petId !== null) {
+      setSelectedPetId(petId);
     }
-    getPets();
   }, []);
 
   useEffect(() => {
@@ -58,23 +53,12 @@ export const Description = () => {
     }
   }, [vetClinic]);
 
-  const getUser = async () => {
-    const response = await useService(userService, "getUser");
-    setUser(response.data);
-  };
-
-  const getPets = async () => {
-    const response = await useService(petService, "getAllPet");
-    setPets(response.data);
-    setUserPets([...userPets, ...pets]);
-  };
-
   const newVisitHandler = async () => {
     setErro("");
     setNewVisitRequest(true);
 
     const data = {
-      pet_id: pet.id,
+      pet_id: selectedPetId,
       vet_clinic: vetClinic,
       description: description !== "" ? description : null,
     };
@@ -91,6 +75,35 @@ export const Description = () => {
     navigation.navigate("calendar");
   };
 
+  const PetPicker = () => (
+    <>
+      <Text style={defaultStyles.inputTopText}>Pet</Text>
+      <View style={defaultStyles.pickerContent}>
+        {Platform.OS === "ios" ? (
+          <PickerIOS
+            style={defaultStyles.picker}
+            selectedValue={selectedPetId}
+            onValueChange={setSelectedPetId}
+          >
+            {pets.map((pet, id) => (
+              <PickerIOS.Item key={id} label={pet.name} value={pet.id} />
+            ))}
+          </PickerIOS>
+        ) : (
+          <Picker
+            style={defaultStyles.picker}
+            selectedValue={selectedPetId}
+            onValueChange={setSelectedPetId}
+          >
+            {pets.map((pet, id) => (
+              <Picker.Item key={id} label={pet.name} value={pet.id} />
+            ))}
+          </Picker>
+        )}
+      </View>
+    </>
+  );
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={defaultStyles.page}>
@@ -100,30 +113,7 @@ export const Description = () => {
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           <View style={styles.content}>
-            <Text style={defaultStyles.inputTopText}>Pet</Text>
-            <View style={defaultStyles.pickerContent}>
-              {Platform.OS === "ios" ? (
-                <PickerIOS
-                  style={defaultStyles.picker}
-                  selectedValue={pet}
-                  onValueChange={setPet}
-                >
-                  {userPets.map((pet, id) => (
-                    <PickerIOS.Item key={id} label={pet.name} value={pet.id} />
-                  ))}
-                </PickerIOS>
-              ) : (
-                <Picker
-                  style={defaultStyles.picker}
-                  selectedValue={pet}
-                  onValueChange={setPet}
-                >
-                  {pets.map((pet, id) => (
-                    <Picker.Item key={id} label={pet.name} value={pet.id} />
-                  ))}
-                </Picker>
-              )}
-            </View>
+            {petId === null && PetPicker()}
 
             <Text style={defaultStyles.inputTopText}>Nome da Clínica</Text>
             <TextInput
