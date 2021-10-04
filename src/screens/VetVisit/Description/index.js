@@ -25,9 +25,9 @@ import {
   petService,
 } from "@services";
 import { useUser, usePets } from "@store";
-import { validateDate, formatDate, formatDateToRequest } from "@utilites";
+import { validateDate, formatDateToRequest } from "@utilites";
 
-export const VetVisit = () => {
+export const Description = () => {
   const [erro, setErro] = useState("");
   const [newVisitRequest, setNewVisitRequest] = useState();
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -51,12 +51,12 @@ export const VetVisit = () => {
   }, []);
 
   useEffect(() => {
-    if (vetClinic && visitDate) {
+    if (vetClinic) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [vetClinic, visitDate]);
+  }, [vetClinic]);
 
   const getUser = async () => {
     const response = await useService(userService, "getUser");
@@ -73,24 +73,10 @@ export const VetVisit = () => {
     setErro("");
     setNewVisitRequest(true);
 
-    if (!validateDate(visitDate)) {
-      setErro("Data da visita inválida");
-      return;
-    }
-    if (nextVisitDate && !validateDate(nextVisitDate)) {
-      setErro("Data da próxima visita inválida");
-      return;
-    }
-
     const data = {
       pet_id: pet.id,
       vet_clinic: vetClinic,
       description: description !== "" ? description : null,
-      visit_date: formatDateToRequest(visitDate),
-      next_visit_date:
-        nextVisitDate === "" || nextVisitDate === null
-          ? null
-          : formatDateToRequest(nextVisitDate),
     };
 
     const response = await useService(vetVisitService, "createVisit", [data]);
@@ -157,24 +143,7 @@ export const VetVisit = () => {
               onChangeText={setDescription}
               value={description}
             />
-            <Text style={defaultStyles.inputTopText}>Data da visita</Text>
-            <TextInput
-              autoCorrect={false}
-              keyboardType="numeric"
-              style={defaultStyles.input}
-              onChangeText={(value) => setVisitDate(formatDate(value))}
-              value={visitDate}
-            />
-            <Text style={defaultStyles.inputTopText}>
-              Data da próxima visita
-            </Text>
-            <TextInput
-              autoCorrect={false}
-              keyboardType="numeric"
-              style={defaultStyles.input}
-              onChangeText={(value) => setNextVisitDate(formatDate(value))}
-              value={nextVisitDate}
-            />
+
             {erro !== "" && <Alert message={erro} />}
             {newVisitRequest ? (
               <ActivityIndicator size="large" color={colors.light} />
@@ -184,7 +153,7 @@ export const VetVisit = () => {
                 disabled={buttonDisabled}
                 onPress={newVisitHandler}
               >
-                <Text style={styles.buttonText}>Cadastrar</Text>
+                <Text style={styles.buttonText}>Próximo</Text>
               </TouchableOpacity>
             )}
           </View>

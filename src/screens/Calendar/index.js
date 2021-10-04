@@ -48,7 +48,7 @@ export const Calendar = () => {
             }}
             onDateChange={setSelectedDate}
           />
-          <Add action={() => navigation.navigate("vetvisit")} />
+          <Add action={() => navigation.navigate("description")} />
         </View>
         <View style={styles.hr}></View>
         <View style={styles.vetVisits}>
