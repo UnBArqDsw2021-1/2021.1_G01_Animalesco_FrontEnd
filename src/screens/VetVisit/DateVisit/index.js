@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { setStatusBarStyle } from "expo-status-bar";
 import {
   KeyboardAvoidingView,
   View,
@@ -11,20 +12,14 @@ import {
   ActivityIndicator,
   Alert,
 } from "react-native";
-import { Picker, PickerIOS } from "@react-native-community/picker";
 import colors from "@assets/styles/colors";
 
 import styles from "./styles";
 import defaultStyles from "@screens/styles.js";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { GoBackHeader } from "@components";
-import {
-  useService,
-  vetVisitService,
-  userService,
-  petService,
-} from "@services";
-import { useUser, usePets } from "@store";
+import { useService, vetVisitService } from "@services";
 import { validateDate, formatDate, formatDateToRequest } from "@utilites";
 
 export const DateVisit = () => {
@@ -32,42 +27,22 @@ export const DateVisit = () => {
   const [newVisitRequest, setNewVisitRequest] = useState();
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
-  const { user, setUser } = useUser();
-  const { pets, setPets } = usePets();
-
-  const [userPets, setUserPets] = useState([{ name: "--", id: -1 }]);
-  const [pet, setPet] = useState(null);
-
-  const [vetClinic, setVetClinic] = useState("");
-  const [description, setDescription] = useState(null);
   const [visitDate, setVisitDate] = useState("");
   const [nextVisitDate, setNextVisitDate] = useState(null);
 
-  useEffect(() => {
-    if (!user) {
-      getUser();
-    }
-    getPets();
-  }, []);
+  const navigation = useNavigation();
+  setStatusBarStyle("dark");
+
+  const routes = useRoute();
+  
 
   useEffect(() => {
-    if (vetClinic && visitDate) {
+    if (visitDate) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
-  }, [vetClinic, visitDate]);
-
-  const getUser = async () => {
-    const response = await useService(userService, "getUser");
-    setUser(response.data);
-  };
-
-  const getPets = async () => {
-    const response = await useService(petService, "getAllPet");
-    setPets(response.data);
-    setUserPets([...userPets, ...pets]);
-  };
+  }, [visitDate]);
 
   const newVisitHandler = async () => {
     setErro("");
@@ -83,7 +58,7 @@ export const DateVisit = () => {
     }
 
     const data = {
-      pet_id: pet.id,
+      pet_id: selectedPetId,
       vet_clinic: vetClinic,
       description: description !== "" ? description : null,
       visit_date: formatDateToRequest(visitDate),
@@ -114,31 +89,6 @@ export const DateVisit = () => {
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
           <View style={styles.content}>
-            <Text style={defaultStyles.inputTopText}>Pet</Text>
-            <View style={defaultStyles.pickerContent}>
-              {Platform.OS === "ios" ? (
-                <PickerIOS
-                  style={defaultStyles.picker}
-                  selectedValue={pet}
-                  onValueChange={setPet}
-                >
-                  {userPets.map((pet, id) => (
-                    <PickerIOS.Item key={id} label={pet.name} value={pet.id} />
-                  ))}
-                </PickerIOS>
-              ) : (
-                <Picker
-                  style={defaultStyles.picker}
-                  selectedValue={pet}
-                  onValueChange={setPet}
-                >
-                  {pets.map((pet, id) => (
-                    <Picker.Item key={id} label={pet.name} value={pet.id} />
-                  ))}
-                </Picker>
-              )}
-            </View>
-
             <Text style={defaultStyles.inputTopText}>Data da visita</Text>
             <TextInput
               autoCorrect={false}
@@ -162,11 +112,15 @@ export const DateVisit = () => {
               <ActivityIndicator size="large" color={colors.light} />
             ) : (
               <TouchableOpacity
-                style={buttonDisabled ? styles.buttonDisabled : styles.button}
+                style={
+                  buttonDisabled
+                    ? defaultStyles.buttonDisabled
+                    : defaultStyles.button
+                }
                 disabled={buttonDisabled}
                 onPress={newVisitHandler}
               >
-                <Text style={styles.buttonText}>Cadastrar</Text>
+                <Text style={defaultStyles.textButton}>Cadastrar</Text>
               </TouchableOpacity>
             )}
           </View>

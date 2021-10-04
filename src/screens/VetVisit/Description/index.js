@@ -57,13 +57,7 @@ export const Description = () => {
     setErro("");
     setNewVisitRequest(true);
 
-    const data = {
-      pet_id: selectedPetId,
-      vet_clinic: vetClinic,
-      description: description !== "" ? description : null,
-    };
-
-    const response = await useService(vetVisitService, "createVisit", [data]);
+    navigation.navigate("dateVisit", { vetClinic, description });
 
     if (response.error) {
       setErro("Error ao registrar uma nova visita. Tente novamente mais tarde");
@@ -72,7 +66,6 @@ export const Description = () => {
     }
 
     setNewVisitRequest(false);
-    navigation.navigate("calendar");
   };
 
   const PetPicker = () => (
@@ -139,11 +132,15 @@ export const Description = () => {
               <ActivityIndicator size="large" color={colors.light} />
             ) : (
               <TouchableOpacity
-                style={buttonDisabled ? styles.buttonDisabled : styles.button}
+                style={
+                  buttonDisabled
+                    ? defaultStyles.buttonDisabled
+                    : defaultStyles.button
+                }
                 disabled={buttonDisabled}
                 onPress={newVisitHandler}
               >
-                <Text style={styles.buttonText}>Próximo</Text>
+                <Text style={defaultStyles.textButton}>Próximo</Text>
               </TouchableOpacity>
             )}
           </View>
