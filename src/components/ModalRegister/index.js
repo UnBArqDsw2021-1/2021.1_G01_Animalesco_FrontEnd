@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Text, Modal, TouchableOpacity } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import styles from "./styles";
 
 import colors from "@assets/styles/colors";
@@ -18,7 +19,7 @@ export const ModalRegister = ({ visible, setVisible, petId = null }) => {
   return (
     <View>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={visible}
         onRequestClose={() => {
@@ -30,26 +31,31 @@ export const ModalRegister = ({ visible, setVisible, petId = null }) => {
           activeOpacity={1}
           onPressOut={() => setVisible(false)}
         >
-          <View style={styles.content}>
-            <TouchableOpacity
-              style={styles.options}
-              onPress={() => onPressSubmit("registervaccine")}
-            >
-              <FontAwesome5 name="syringe" size={40} color={colors.dark} />
-              <Text style={styles.optionsText}>Vacina</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.options}>
-              <FontAwesome5 name="pills" size={40} color={colors.dark} />
-              <Text style={styles.optionsText}>Remédio</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.optionsWithoutBorder}
-              onPress={() => onPressSubmit("visitDescription")}
-            >
-              <FontAwesome5 name="cat" size={40} color={colors.dark} />
-              <Text style={styles.optionsText}>Veterinário</Text>
-            </TouchableOpacity>
-          </View>
+          <LinearGradient
+            style={styles.container}
+            colors={["transparent", "rgba(52, 52, 52, 0.4)", "transparent"]}
+          >
+            <View style={styles.content}>
+              <TouchableOpacity
+                style={styles.options}
+                onPress={() => onPressSubmit("registervaccine")}
+              >
+                <FontAwesome5 name="syringe" size={40} color={colors.dark} />
+                <Text style={styles.optionsText}>Vacina</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.options}>
+                <FontAwesome5 name="pills" size={40} color={colors.dark} />
+                <Text style={styles.optionsText}>Remédio</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.optionsWithoutBorder}
+                onPress={() => onPressSubmit("visitDescription")}
+              >
+                <FontAwesome5 name="cat" size={40} color={colors.dark} />
+                <Text style={styles.optionsText}>Veterinário</Text>
+              </TouchableOpacity>
+            </View>
+          </LinearGradient>
         </TouchableOpacity>
       </Modal>
     </View>
