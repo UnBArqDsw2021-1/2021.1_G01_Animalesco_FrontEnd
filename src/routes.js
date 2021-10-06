@@ -10,6 +10,7 @@ import {
   SpecieBreed,
   PetPhoto,
   RegisterVaccine,
+  RegisterMedicine,
   ColorSex,
   PetPerfil,
   Calendar,
@@ -40,6 +41,7 @@ const Routes = () => {
       <Stack.Screen name="calendar" component={Calendar} />
       <Stack.Screen name="visitDescription" component={Description} />
       <Stack.Screen name="dateVisit" component={DateVisit} />
+      <Stack.Screen name="registermedicine" component={RegisterMedicine} />
     </Stack.Navigator>
   );
 };

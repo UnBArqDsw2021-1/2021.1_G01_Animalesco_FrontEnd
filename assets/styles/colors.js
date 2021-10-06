@@ -3,7 +3,7 @@ const colors = {
   secondary: "#fbb03b",
   primaryGreen: "#22b573",
   secondaryGreen: "#006837",
-  primaryBlue: "#00a99d",
+  primaryBlue: "#0084D5",
   secondaryBlue: "#0071bc",
   danger: "#f44336",
   dangerDark: "#78241e",
@@ -12,7 +12,6 @@ const colors = {
   gray: "#35353554",
   grayLight: "#35353514",
   light: "#f7f7f7",
-  lightToBackground: "#f7f7f744",
   ice: "#EEEEEE",
 };
 

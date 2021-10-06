@@ -29,6 +29,7 @@ export const Login = () => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loadingLoginRequest, setLoadingLoginRequest] = useState(false);
   const navigation = useNavigation();
+
   setStatusBarStyle("light");
 
   useEffect(() => {

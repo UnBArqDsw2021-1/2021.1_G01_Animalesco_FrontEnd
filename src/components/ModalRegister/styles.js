@@ -2,6 +2,9 @@ import { StyleSheet } from "react-native";
 import colors from "@assets/styles/colors";
 
 const styles = StyleSheet.create({
+  page: {
+    zIndex: 30,
+  },
   container: {
     flex: 1,
     justifyContent: "center",

@@ -30,8 +30,8 @@ import { usePets } from "@store";
 export const RegisterVaccine = () => {
   const [nameVaccine, setNameVaccine] = useState("");
   const [doseData, setDoseData] = useState("");
-  const [vaccineRequest, setVaccineRequest] = useState(false);
   const [doseRepeatData, setDoseRepeatData] = useState("");
+  const [vaccineRequest, setVaccineRequest] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [selectedPetId, setSelectedPetId] = useState();
   const [erro, setErro] = useState("");
@@ -67,15 +67,18 @@ export const RegisterVaccine = () => {
       setVaccineRequest(false);
       return;
     }
-    if (doseRepeatData && !validateDate(doseRepeatData)) {
-      setErro("Data inválida");
-      setVaccineRequest(false);
-      return;
-    }
-    if (!validateDateAfterOther(doseData, doseRepeatData)) {
-      setErro("A data da segunda dose deve ser após a primeira dose");
-      setVaccineRequest(false);
-      return;
+
+    if (doseRepeatData) {
+      if (!validateDate(doseRepeatData)) {
+        setErro("Data inválida");
+        setVaccineRequest(false);
+        return;
+      }
+      if (!validateDateAfterOther(doseData, doseRepeatData)) {
+        setErro("A data da segunda dose deve ser após a primeira dose");
+        setVaccineRequest(false);
+        return;
+      }
     }
 
     const data = {

@@ -43,7 +43,10 @@ export const ModalRegister = ({ visible, setVisible, petId = null }) => {
                 <FontAwesome5 name="syringe" size={40} color={colors.dark} />
                 <Text style={styles.optionsText}>Vacina</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.options}>
+              <TouchableOpacity
+                style={styles.options}
+                onPress={() => onPressSubmit("registermedicine")}
+              >
                 <FontAwesome5 name="pills" size={40} color={colors.dark} />
                 <Text style={styles.optionsText}>Remédio</Text>
               </TouchableOpacity>
