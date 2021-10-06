@@ -26,7 +26,6 @@ export const DateVisit = () => {
   const [erro, setErro] = useState("");
   const [newVisitRequest, setNewVisitRequest] = useState();
   const [buttonDisabled, setButtonDisabled] = useState(true);
-
   const [visitDate, setVisitDate] = useState("");
   const [nextVisitDate, setNextVisitDate] = useState(null);
 
@@ -34,7 +33,7 @@ export const DateVisit = () => {
   setStatusBarStyle("dark");
 
   const routes = useRoute();
-  
+  const { selectedPetId, vetClinic, description } = routes.params;
 
   useEffect(() => {
     if (visitDate) {
@@ -85,44 +84,46 @@ export const DateVisit = () => {
       <View style={defaultStyles.page}>
         <GoBackHeader />
         <KeyboardAvoidingView
-          style={styles.container}
+          style={defaultStyles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <View style={styles.content}>
-            <Text style={defaultStyles.inputTopText}>Data da visita</Text>
-            <TextInput
-              autoCorrect={false}
-              keyboardType="numeric"
-              style={defaultStyles.input}
-              onChangeText={(value) => setVisitDate(formatDate(value))}
-              value={visitDate}
-            />
-            <Text style={defaultStyles.inputTopText}>
-              Data da próxima visita
-            </Text>
-            <TextInput
-              autoCorrect={false}
-              keyboardType="numeric"
-              style={defaultStyles.input}
-              onChangeText={(value) => setNextVisitDate(formatDate(value))}
-              value={nextVisitDate}
-            />
-            {erro !== "" && <Alert message={erro} />}
-            {newVisitRequest ? (
-              <ActivityIndicator size="large" color={colors.light} />
-            ) : (
-              <TouchableOpacity
-                style={
-                  buttonDisabled
-                    ? defaultStyles.buttonDisabled
-                    : defaultStyles.button
-                }
-                disabled={buttonDisabled}
-                onPress={newVisitHandler}
-              >
-                <Text style={defaultStyles.textButton}>Cadastrar</Text>
-              </TouchableOpacity>
-            )}
+          <View style={defaultStyles.content}>
+            <View style={defaultStyles.formCadastro}>
+              <Text style={defaultStyles.inputTopText}>Data da visita</Text>
+              <TextInput
+                autoCorrect={false}
+                keyboardType="numeric"
+                style={defaultStyles.input}
+                onChangeText={(value) => setVisitDate(formatDate(value))}
+                value={visitDate}
+              />
+              <Text style={defaultStyles.inputTopText}>
+                Data da próxima visita
+              </Text>
+              <TextInput
+                autoCorrect={false}
+                keyboardType="numeric"
+                style={defaultStyles.input}
+                onChangeText={(value) => setNextVisitDate(formatDate(value))}
+                value={nextVisitDate}
+              />
+              {erro !== "" && <Alert message={erro} />}
+              {newVisitRequest ? (
+                <ActivityIndicator size="large" color={colors.light} />
+              ) : (
+                <TouchableOpacity
+                  style={
+                    buttonDisabled
+                      ? defaultStyles.buttonDisabled
+                      : defaultStyles.button
+                  }
+                  disabled={buttonDisabled}
+                  onPress={newVisitHandler}
+                >
+                  <Text style={defaultStyles.textButton}>Cadastrar</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
         </KeyboardAvoidingView>
       </View>

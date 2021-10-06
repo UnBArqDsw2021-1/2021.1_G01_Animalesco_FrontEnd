@@ -10,9 +10,12 @@ class VetVisitService {
     visit_date,
     next_visit_date = null,
   }) {
-    const data = { vet_clinic, description, visit_date, next_visit_date };
-
-    console.log(data);
+    const data = {
+      vet_clinic: vet_clinic,
+      description: description,
+      visit_date: visit_date,
+      next_visit_date: next_visit_date,
+    };
 
     const response = await api.post(`/pets/${pet_id}/vet_visits/`, data);
     return response;

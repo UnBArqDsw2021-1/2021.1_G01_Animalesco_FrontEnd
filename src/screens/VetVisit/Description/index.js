@@ -9,29 +9,23 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Platform,
-  ActivityIndicator,
-  Alert,
 } from "react-native";
 import { Picker, PickerIOS } from "@react-native-community/picker";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import colors from "@assets/styles/colors";
 
 import styles from "./styles";
 import defaultStyles from "@screens/styles.js";
 
 import { GoBackHeader } from "@components";
-import { useService, vetVisitService } from "@services";
 import { usePets } from "@store";
 
 export const Description = () => {
-  const [erro, setErro] = useState("");
-  const [newVisitRequest, setNewVisitRequest] = useState();
+  const { pets } = usePets();
+
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [vetClinic, setVetClinic] = useState("");
   const [description, setDescription] = useState(null);
-  const [selectedPetId, setSelectedPetId] = useState();
-
-  const { pets } = usePets();
+  const [selectedPetId, setSelectedPetId] = useState(pets[0].id);
 
   const routes = useRoute();
   const { petId } = routes.params;
@@ -52,21 +46,6 @@ export const Description = () => {
       setButtonDisabled(true);
     }
   }, [vetClinic]);
-
-  const newVisitHandler = async () => {
-    setErro("");
-    setNewVisitRequest(true);
-
-    navigation.navigate("dateVisit", { vetClinic, description });
-
-    if (response.error) {
-      setErro("Error ao registrar uma nova visita. Tente novamente mais tarde");
-      setNewVisitRequest(false);
-      return;
-    }
-
-    setNewVisitRequest(false);
-  };
 
   const PetPicker = () => (
     <>
@@ -102,35 +81,32 @@ export const Description = () => {
       <View style={defaultStyles.page}>
         <GoBackHeader />
         <KeyboardAvoidingView
-          style={styles.container}
+          style={defaultStyles.container}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <View style={styles.content}>
-            {petId === null && PetPicker()}
+          <View style={defaultStyles.content}>
+            <View style={defaultStyles.formCadastro}>
+              {petId === null && PetPicker()}
 
-            <Text style={defaultStyles.inputTopText}>Nome da Clínica</Text>
-            <TextInput
-              autoCorrect={false}
-              maxLength={100}
-              style={defaultStyles.input}
-              onChangeText={setVetClinic}
-              value={vetClinic}
-            />
-            <Text style={defaultStyles.inputTopText}>Descrição</Text>
-            <TextInput
-              autoCorrect={false}
-              multiline
-              numberOfLines={8}
-              maxLength={350}
-              style={styles.descriptionInput}
-              onChangeText={setDescription}
-              value={description}
-            />
+              <Text style={defaultStyles.inputTopText}>Nome da Clínica</Text>
+              <TextInput
+                autoCorrect={false}
+                maxLength={100}
+                style={defaultStyles.input}
+                onChangeText={setVetClinic}
+                value={vetClinic}
+              />
+              <Text style={defaultStyles.inputTopText}>Descrição</Text>
+              <TextInput
+                autoCorrect={false}
+                multiline
+                numberOfLines={8}
+                maxLength={350}
+                style={styles.descriptionInput}
+                onChangeText={setDescription}
+                value={description}
+              />
 
-            {erro !== "" && <Alert message={erro} />}
-            {newVisitRequest ? (
-              <ActivityIndicator size="large" color={colors.light} />
-            ) : (
               <TouchableOpacity
                 style={
                   buttonDisabled
@@ -138,11 +114,17 @@ export const Description = () => {
                     : defaultStyles.button
                 }
                 disabled={buttonDisabled}
-                onPress={newVisitHandler}
+                onPress={() =>
+                  navigation.navigate("dateVisit", {
+                    selectedPetId,
+                    vetClinic,
+                    description,
+                  })
+                }
               >
                 <Text style={defaultStyles.textButton}>Próximo</Text>
               </TouchableOpacity>
-            )}
+            </View>
           </View>
         </KeyboardAvoidingView>
       </View>

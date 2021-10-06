@@ -3,21 +3,6 @@ import colors from "@assets/styles/colors";
 import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  content: {
-    height: "50%",
-    width: "90%",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "10%"
-  },
   descriptionInput: {
     height: 123,
     width: "100%",
