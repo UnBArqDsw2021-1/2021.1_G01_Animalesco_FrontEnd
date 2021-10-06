@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
     height: "100%",
     display: "flex",
     justifyContent: "space-between",
-    paddingVertical: 55,
+    paddingVertical: 65,
   },
   calendar: {
     height: "70%",

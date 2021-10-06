@@ -1,11 +1,11 @@
 import React, { useState } from "react";
+import { setStatusBarStyle } from "expo-status-bar";
 import { View, Text, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import styles from "./styles";
 import defaultStyles from "@screens/styles.js";
 
-import { ModalRegister, Add, GoBackHeader } from "@components";
+import { ModalRegister, Add, Header, Footer } from "@components";
 import CalendarPicker from "react-native-calendar-picker";
 import moment from "moment";
 
@@ -14,11 +14,12 @@ export const Calendar = () => {
     moment(new Date()).format("yyyy-MM-DD")
   );
   const [modalVisible, setModalVisible] = useState(false);
-  const navigation = useNavigation();
+
+  setStatusBarStyle("light");
 
   return (
     <View style={defaultStyles.page}>
-      <GoBackHeader />
+      <Header />
       <View style={styles.container}>
         <View style={styles.calendar}>
           <CalendarPicker
@@ -44,7 +45,6 @@ export const Calendar = () => {
             selectedDayColor="#F15A24"
             selectedDayTextColor="#000000"
             textStyle={{
-              fontFamily: "Cochin",
               color: "#000000",
             }}
             onDateChange={setSelectedDate}
@@ -60,6 +60,7 @@ export const Calendar = () => {
             </Text>
           </ScrollView>
         </View>
+        <Footer />
       </View>
     </View>
   );
