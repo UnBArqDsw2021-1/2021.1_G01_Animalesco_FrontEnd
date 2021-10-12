@@ -19,7 +19,10 @@ export const Footer = () => {
           <FontAwesome5 name="home" size={20} color={colors.light} />
           <Text style={styles.itensText}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.itens}>
+        <TouchableOpacity
+          style={styles.itens}
+          onPress={() => navigation.navigate("calendar")}
+        >
           <FontAwesome5 name="calendar" size={20} color={colors.light} />
           <Text style={styles.itensText}>Calendário</Text>
         </TouchableOpacity>

@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import colors from "@assets/styles/colors";
-import Constants from "expo-constants";
 
 const styles = StyleSheet.create({
   container: {

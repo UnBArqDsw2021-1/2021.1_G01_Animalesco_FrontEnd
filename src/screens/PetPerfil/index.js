@@ -8,8 +8,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import defaultStyles from "@screens/styles.js";
 import colors from "@assets/styles/colors";
 
-import { ModalRegister } from "./components";
-import { Add, GoBackHeader } from "@components";
+import { Add, GoBackHeader, ModalRegister } from "@components";
 import { formatAge } from "@utilites";
 import styles from "./styles";
 

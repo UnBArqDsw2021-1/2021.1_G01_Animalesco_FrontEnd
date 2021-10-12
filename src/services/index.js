@@ -5,5 +5,6 @@ export { logoutService } from "./logout";
 export { petService } from "./pet";
 export { specieService } from "./specie";
 export { vaccineService } from "./vaccine";
+export { vetVisitService } from "./vetVisit";
 export { useService } from "./useService";
 export { medicineService } from "./medicine";

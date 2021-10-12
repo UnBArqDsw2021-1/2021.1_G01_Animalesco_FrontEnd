@@ -5,3 +5,4 @@ export { Alert } from "./Alert";
 export { Header } from "./Header";
 export { Add } from "./Add";
 export { Footer } from "./Footer";
+export { ModalRegister } from "./ModalRegister";

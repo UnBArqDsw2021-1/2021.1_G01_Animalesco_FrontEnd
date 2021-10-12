@@ -22,7 +22,10 @@ import {
   validateDateAfterOther,
 } from "@utilites";
 import { GoBackHeader, Alert } from "@components";
-import { useService, vaccineService } from "@services";
+import { useService, vaccineService, petService } from "@services";
+import { Picker, PickerIOS } from "@react-native-community/picker";
+
+import { usePets } from "@store";
 
 export const RegisterVaccine = () => {
   const [nameVaccine, setNameVaccine] = useState("");
@@ -30,13 +33,22 @@ export const RegisterVaccine = () => {
   const [doseRepeatData, setDoseRepeatData] = useState("");
   const [vaccineRequest, setVaccineRequest] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
+  const [selectedPetId, setSelectedPetId] = useState();
   const [erro, setErro] = useState("");
+
+  const { pets } = usePets();
 
   const routes = useRoute();
   const { petId } = routes.params;
 
   const navigation = useNavigation();
   setStatusBarStyle("dark");
+
+  useEffect(() => {
+    if (petId !== null) {
+      setSelectedPetId(petId);
+    }
+  }, []);
 
   useEffect(() => {
     if (doseData && nameVaccine) {
@@ -70,7 +82,7 @@ export const RegisterVaccine = () => {
     }
 
     const data = {
-      pet_id: petId,
+      pet_id: selectedPetId,
       name: nameVaccine,
       application_date: formatDateToRequest(doseData),
       next_application_date: formatDateToRequest(doseRepeatData),
@@ -88,6 +100,35 @@ export const RegisterVaccine = () => {
     navigation.navigate("home");
   };
 
+  const PetPicker = () => (
+    <>
+      <Text style={defaultStyles.inputTopText}>Pet</Text>
+      <View style={defaultStyles.pickerContent}>
+        {Platform.OS === "ios" ? (
+          <PickerIOS
+            style={defaultStyles.picker}
+            selectedValue={selectedPetId}
+            onValueChange={setSelectedPetId}
+          >
+            {pets.map((pet, id) => (
+              <PickerIOS.Item key={id} label={pet.name} value={pet.id} />
+            ))}
+          </PickerIOS>
+        ) : (
+          <Picker
+            style={defaultStyles.picker}
+            selectedValue={selectedPetId}
+            onValueChange={setSelectedPetId}
+          >
+            {pets.map((pet, id) => (
+              <Picker.Item key={id} label={pet.name} value={pet.id} />
+            ))}
+          </Picker>
+        )}
+      </View>
+    </>
+  );
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={defaultStyles.page}>
@@ -98,6 +139,7 @@ export const RegisterVaccine = () => {
         >
           <View style={defaultStyles.content}>
             <View style={defaultStyles.formCadastro}>
+              {petId === null && PetPicker()}
               <Text style={defaultStyles.inputTopText}>Nome da vacina</Text>
               <TextInput
                 style={defaultStyles.input}
